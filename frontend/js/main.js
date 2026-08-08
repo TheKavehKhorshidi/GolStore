@@ -1,3 +1,4 @@
+// header section
 fetch('partials/header/header.html')
    .then(res => res.text())
    .then(html => {
