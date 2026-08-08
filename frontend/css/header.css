@@ -1,8 +1,74 @@
 .site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 32px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 16px 32px;
+   background-color: #ffffff;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.headerIcons {
+   width: 27px;
+   height: 27px;
+   color: #333333;
+   transition: color 0.3s ease;
+}
+
+.headerIconsContainer {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+}
+
+.headerLogoAndLinkContainer{
+   display: flex;
+   align-items: center;
+   gap: 50px;
+}
+
+.headerLinksContainer{
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   font-weight: bold;
+}
+
+.headerLink{
+   font-size: 16px;
+   color: #333333;
+   transition: color 0.3s ease;
+}
+.headerLink:hover{
+   color: #a90b23;
+}
+
+.logoText{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 24px;
+   font-weight: bold;
+   color: #333333;
+   padding-top: 5px;
+}
+
+
+.logo{
+   display: flex;
+   align-items: center;
+   align-content: center;
+   justify-content: center;
+   font-size: 24px;
+   font-weight: bold;
+   color: #333333;
+   display: flex;
+   align-items: center;
+}
+.logo:hover{
+   color: #a90b23;
+}
+
+.logoImage{
+   width: 40px;
+   height: 40px;
 }
