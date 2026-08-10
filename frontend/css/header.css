@@ -64,6 +64,7 @@
    display: flex;
    align-items: center;
 }
+
 .logo:hover{
    color: #a90b23;
 }

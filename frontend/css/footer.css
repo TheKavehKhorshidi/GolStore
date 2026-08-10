@@ -106,3 +106,28 @@
    color: #8a947f;
    font-size: 13px;
 }
+
+.logoContainer{
+   display: flex;
+   align-content: center;
+}
+
+.logo{
+   display: flex;
+   align-items: center;
+   align-content: center;
+   justify-content: center;
+   font-size: 24px;
+   font-weight: bold;
+   color: #333333;
+   display: flex;
+   align-items: center;
+}
+.logo:hover{
+   color: #a90b23;
+}
+
+.logoImage{
+   width: 40px;
+   height: 40px;
+}
