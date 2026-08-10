@@ -4,3 +4,10 @@ fetch('partials/header/header.html')
    .then(html => {
       document.getElementById('header-placeholder').innerHTML = html;
    });
+
+
+fetch('partials/footer/footer.html')
+   .then(res => res.text())
+   .then(html => {
+      document.getElementById('SiteFooter').innerHTML = html;
+   });

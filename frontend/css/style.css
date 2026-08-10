@@ -40,15 +40,19 @@ button {
    font-family: inherit;
 }
 
-
-main {
-   padding: 24px 32px;
+.container {
+   padding: 24px 62px;
 }
 
 .section-title {
-  font-size: 24px;
-  font-weight: 700;
-  padding: 15px 0;
+   font-size: 24px;
+   text-align: right;
+   font-weight: 700;
+   padding: 50px 0 0px 0;
+   font-size: 26px;
+   font-weight: 700;
+   color: #1a1a1a;
+   margin-bottom: 30px;
 }
 
 
@@ -75,5 +79,3 @@ main {
    font-style: normal;
    font-display: swap;
 }
-
-
