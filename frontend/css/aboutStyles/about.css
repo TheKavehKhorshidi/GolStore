@@ -1,0 +1,372 @@
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
+
+.main {
+   direction: rtl;
+   background: #fff;
+}
+
+.container {
+   width: min(1200px, calc(100% - 60px));
+   margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.AboutHero {
+   min-height: 500px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   text-align: center;
+
+   background:
+      linear-gradient(
+         rgba(31, 42, 28, 0.72),
+         rgba(31, 42, 28, 0.72)
+      ),
+      url("../../image/about/story.jpg") center / cover no-repeat;
+}
+
+.AboutHeroContent {
+   max-width: 750px;
+   padding: 30px;
+}
+
+.AboutHeroContent::before {
+   content: "GOLSTORE";
+
+   display: block;
+
+   margin-bottom: 18px;
+
+   color: #8fbb7d;
+
+   font-size: 12px;
+   font-weight: 700;
+   letter-spacing: 4px;
+}
+
+.AboutHeroContent h1 {
+   margin: 0 0 18px;
+
+   color: #fff;
+
+   font-size: clamp(38px, 6vw, 64px);
+   font-weight: 800;
+
+   line-height: 1.35;
+}
+
+.AboutHeroContent p {
+   margin: 0;
+
+   color: #dce5d9;
+
+   font-size: 17px;
+   line-height: 2;
+}
+
+
+/* =========================================================
+   STORY
+========================================================= */
+
+.AboutStory {
+   display: grid;
+
+   grid-template-columns: 1fr 1fr;
+
+   align-items: center;
+
+   gap: 75px;
+
+   padding: 100px 0;
+}
+
+.AboutStoryImage {
+   overflow: hidden;
+
+   border-radius: 24px;
+
+   box-shadow: 0 15px 40px rgba(31, 42, 28, 0.12);
+}
+
+.AboutStoryImage img {
+   display: block;
+
+   width: 100%;
+   height: 500px;
+
+   object-fit: cover;
+
+   transition: transform 0.5s ease;
+}
+
+.AboutStoryImage:hover img {
+   transform: scale(1.04);
+}
+
+.AboutStoryText {
+   padding: 10px 0;
+}
+
+.section-title {
+   margin: 0 0 25px;
+
+   color: #1f2a1c;
+
+   font-size: 30px;
+   font-weight: 800;
+
+   line-height: 1.5;
+}
+
+.section-title::before {
+   content: "";
+
+   display: block;
+
+   width: 45px;
+   height: 4px;
+
+   margin-bottom: 15px;
+
+   border-radius: 10px;
+
+   background: #6b8f5c;
+}
+
+.AboutStoryText p {
+   margin: 0 0 18px;
+
+   color: #626b5f;
+
+   font-size: 15px;
+   line-height: 2.2;
+}
+
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.AboutValuesGrid {
+   display: grid;
+
+   grid-template-columns: repeat(3, 1fr);
+
+   gap: 22px;
+
+   margin-bottom: 70px;
+}
+
+.AboutValueCard {
+   padding: 32px 28px;
+
+   border: 1px solid #edf1eb;
+   border-radius: 20px;
+
+   background: #fff;
+
+   text-align: center;
+
+   box-shadow: 0 5px 20px rgba(31, 42, 28, 0.06);
+
+   transition: 0.25s ease;
+}
+
+.AboutValueCard:hover {
+   transform: translateY(-7px);
+
+   border-color: #d8e4d3;
+
+   box-shadow: 0 15px 35px rgba(31, 42, 28, 0.11);
+}
+
+.AboutValueIcon {
+   width: 58px;
+   height: 58px;
+
+   margin: 0 auto 20px;
+   padding: 15px;
+
+   border-radius: 16px;
+
+   background: #1f2a1c;
+
+   object-fit: contain;
+
+   transition: 0.25s ease;
+}
+
+.AboutValueCard:hover .AboutValueIcon {
+   background: #6b8f5c;
+
+   transform: translateY(-3px);
+}
+
+.AboutValueCard h4 {
+   margin: 0 0 12px;
+
+   color: #1f2a1c;
+
+   font-size: 18px;
+   font-weight: 700;
+}
+
+.AboutValueCard p {
+   margin: 0;
+
+   color: #747c71;
+
+   font-size: 14px;
+   line-height: 2;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.AboutCTA {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   gap: 30px;
+
+   margin-bottom: 90px;
+   padding: 45px 50px;
+
+   border-radius: 24px;
+
+   background: #1f2a1c;
+
+   box-shadow: 0 15px 35px rgba(31, 42, 28, 0.14);
+}
+
+.AboutCTA h3 {
+   margin: 0;
+
+   color: #fff;
+
+   font-size: 23px;
+   font-weight: 700;
+
+   line-height: 1.8;
+}
+
+.AboutCTABtn {
+   flex-shrink: 0;
+
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+
+   padding: 13px 25px;
+
+   border-radius: 10px;
+
+   background: #6b8f5c;
+
+   color: #fff;
+
+   text-decoration: none;
+
+   font-size: 14px;
+   font-weight: 600;
+
+   transition: 0.25s ease;
+}
+
+.AboutCTABtn:hover {
+   background: #8fbb7d;
+
+   transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+   .container {
+      width: calc(100% - 40px);
+   }
+
+   .AboutStory {
+      grid-template-columns: 1fr;
+      gap: 45px;
+   }
+
+   .AboutValuesGrid {
+      grid-template-columns: repeat(2, 1fr);
+   }
+
+   .AboutCTA {
+      align-items: flex-start;
+      flex-direction: column;
+   }
+}
+
+
+@media (max-width: 600px) {
+
+   .container {
+      width: calc(100% - 30px);
+   }
+
+   .AboutHero {
+      min-height: 430px;
+   }
+
+   .AboutHeroContent h1 {
+      font-size: 36px;
+   }
+
+   .AboutHeroContent p {
+      font-size: 14px;
+   }
+
+   .AboutStory {
+      padding: 60px 0;
+   }
+
+   .AboutStoryImage img {
+      height: 350px;
+   }
+
+   .section-title {
+      font-size: 26px;
+   }
+
+   .AboutStoryText p {
+      font-size: 14px;
+   }
+
+   .AboutValuesGrid {
+      grid-template-columns: 1fr;
+   }
+
+   .AboutCTA {
+      margin-bottom: 60px;
+      padding: 32px 24px;
+   }
+
+   .AboutCTA h3 {
+      font-size: 19px;
+   }
+
+   .AboutCTABtn {
+      width: 100%;
+   }
+}
