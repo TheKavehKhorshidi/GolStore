@@ -1,0 +1,244 @@
+/* =========================================================
+   AUTH PAGE
+========================================================= */
+
+.AuthPage {
+   min-height: 100vh;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   padding: 50px 20px;
+
+   direction: rtl;
+
+   background: #e3ede2;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.AuthCard {
+   width: 100%;
+   max-width: 430px;
+
+   padding: 40px;
+
+   background: #ffffff;
+
+   border-radius: 22px;
+
+   box-shadow: 0 10px 30px rgba(31, 42, 28, 0.10);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.AuthLogo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   gap: 12px;
+
+   margin-bottom: 30px;
+}
+
+.AuthLogoIcon {
+   width: 45px;
+   height: 45px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   border-radius: 13px;
+
+   background: #e3ede2;
+
+   font-size: 21px;
+}
+
+.AuthLogo h1 {
+   margin: 0;
+
+   color: #1f2a1c;
+
+   font-size: 22px;
+   font-weight: 800;
+}
+
+.AuthLogo span {
+   display: block;
+
+   margin-top: 2px;
+
+   color: #6b8f5c;
+
+   font-size: 10px;
+   letter-spacing: 2px;
+
+   direction: ltr;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.AuthHeader {
+   text-align: center;
+
+   margin-bottom: 28px;
+}
+
+.AuthHeader h2 {
+   margin: 0 0 8px;
+
+   color: #1f2a1c;
+
+   font-size: 24px;
+   font-weight: 800;
+}
+
+.AuthHeader p {
+   margin: 0;
+
+   color: #747c71;
+
+   font-size: 13px;
+   line-height: 2;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.AuthForm {
+   display: flex;
+   flex-direction: column;
+
+   gap: 17px;
+}
+
+.FormGroup {
+   display: flex;
+   flex-direction: column;
+
+   gap: 7px;
+}
+
+.FormGroup label {
+   color: #1f2a1c;
+
+   font-size: 13px;
+   font-weight: 600;
+}
+
+.FormGroup input {
+   width: 100%;
+   box-sizing: border-box;
+
+   padding: 13px 14px;
+
+   border: 1px solid #dce7d9;
+   border-radius: 10px;
+
+   outline: none;
+
+   background: #f8faf7;
+
+   color: #1f2a1c;
+
+   font-family: inherit;
+   font-size: 14px;
+
+   transition: 0.2s ease;
+}
+
+.FormGroup input::placeholder {
+   color: #a3aca0;
+}
+
+.FormGroup input:focus {
+   border-color: #6b8f5c;
+
+   background: #ffffff;
+
+   box-shadow: 0 0 0 3px rgba(107, 143, 92, 0.10);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.AuthButton {
+   width: 100%;
+
+   padding: 13px;
+
+   margin-top: 4px;
+
+   border: none;
+   border-radius: 10px;
+
+   background: #6b8f5c;
+
+   color: #ffffff;
+
+   font-family: inherit;
+   font-size: 14px;
+   font-weight: 700;
+
+   cursor: pointer;
+
+   transition: 0.2s ease;
+}
+
+.AuthButton:hover {
+   background: #1f2a1c;
+
+   transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.AuthFooter {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   gap: 6px;
+
+   margin-top: 24px;
+   padding-top: 20px;
+
+   border-top: 1px solid #edf1eb;
+
+   color: #747c71;
+
+   font-size: 13px;
+}
+
+.AuthFooter a {
+   color: #6b8f5c;
+
+   font-weight: 700;
+
+   text-decoration: none;
+}
+
+.AuthFooter a:hover {
+   color: #1f2a1c;
+}
+
