@@ -2,15 +2,22 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
+   width: 100%;
+   box-sizing: border-box;
    padding: 16px 32px;
    background-color: #ffffff;
    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
+/* =========================
+   Header Icons
+========================= */
+
 .headerIcons {
    width: 27px;
    height: 27px;
    color: #333333;
+   display: block;
    transition: color 0.3s ease;
 }
 
@@ -20,56 +27,252 @@
    gap: 16px;
 }
 
-.headerLogoAndLinkContainer{
+/* =========================
+   Logo + Navigation
+========================= */
+
+.headerLogoAndLinkContainer {
    display: flex;
    align-items: center;
    gap: 50px;
 }
 
-.headerLinksContainer{
+.headerLinksContainer {
    display: flex;
    align-items: center;
    gap: 20px;
    font-weight: bold;
 }
 
-.headerLink{
+.headerLink {
    font-size: 16px;
+}
+
+.headerLink a {
+   text-decoration: none;
    color: #333333;
    transition: color 0.3s ease;
 }
-.headerLink:hover{
+
+.headerLink a:hover {
    color: #a90b23;
 }
 
-.logoText{
+/* =========================
+   Logo
+========================= */
+
+.logo {
    display: flex;
    align-items: center;
    justify-content: center;
    font-size: 24px;
    font-weight: bold;
    color: #333333;
+}
+
+.logo:hover {
+   color: #a90b23;
+}
+
+.logoText {
+   display: flex;
+   align-items: center;
+   justify-content: center;
    padding-top: 5px;
-}
-
-
-.logo{
-   display: flex;
-   align-items: center;
-   align-content: center;
-   justify-content: center;
    font-size: 24px;
    font-weight: bold;
    color: #333333;
-   display: flex;
-   align-items: center;
 }
 
-.logo:hover{
-   color: #a90b23;
+.logoText1 {
+   margin: 0;
 }
 
-.logoImage{
+.logoImage {
    width: 40px;
    height: 40px;
+   object-fit: contain;
+}
+
+/* =========================
+   User Menu
+========================= */
+
+.UserMenu {
+   position: relative;
+   cursor: pointer;
+}
+
+.UserButton {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+}
+
+.UserDropdown {
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 290px;
+   box-sizing: border-box;
+
+   text-align: center;
+
+   background: #ffffff;
+   border-radius: 14px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+   padding: 12px;
+
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+
+   opacity: 0;
+   visibility: hidden;
+   transform: translateY(-5px);
+
+   transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+   z-index: 999;
+}
+
+.UserMenu:hover .UserDropdown {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(0);
+}
+
+/* =========================
+   User Information
+========================= */
+
+.UserInfo {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+   padding-bottom: 10px;
+   border-bottom: 1px solid #eeeeee;
+}
+
+.UserInfo strong {
+   font-size: 14px;
+   color: #333333;
+}
+
+.UserInfo span {
+   font-size: 12px;
+   color: #777777;
+}
+
+/* =========================
+   User Menu Items
+========================= */
+
+.UserMenuItem {
+   display: block;
+   text-decoration: none;
+   padding: 10px;
+   border-radius: 8px;
+   font-size: 13px;
+   font-weight: 600;
+   transition: background 0.2s ease, color 0.2s ease;
+}
+
+.AdminItem {
+   background: #6b8f5c;
+   color: #ffffff !important;
+}
+
+.AdminItem:hover {
+   background: #5a7b4d;
+}
+
+.LogoutItem {
+   background: #fff4f4;
+   color: #bb5d5d !important;
+}
+
+.LogoutItem:hover {
+   background: #bb5d5d;
+   color: #ffffff !important;
+}
+
+/* =========================
+   Guest User
+========================= */
+
+.GuestInfo {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 12px;
+}
+
+.GuestInfo span {
+   font-size: 13px;
+   color: #777777;
+}
+
+.GuestInfo a {
+   width: 100%;
+   box-sizing: border-box;
+   text-align: center;
+   text-decoration: none;
+   background: #6b8f5c;
+   color: #ffffff !important;
+   padding: 10px;
+   border-radius: 8px;
+   font-size: 14px;
+   font-weight: bold;
+   transition: background 0.2s ease;
+}
+
+.GuestInfo a:hover {
+   background: #5a7b4d;
+}
+
+
+/* این استایل رو به فایل frontend/css/homeStyles/header.css اضافه کن */
+
+.cartIconWrapper {
+   position: relative;
+}
+
+.cart-count-container {
+   width: 20px;
+   height: 20px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   background-color: #6b8f5c;
+
+   border-radius: 50%;
+
+   position: absolute;
+   top: -40%;
+   right: -40%;
+}
+
+.cartDot {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   width: 100%;
+   height: 100%;
+
+   color: white;
+
+   font-size: 13px;
+   font-weight: 700;
+
+   line-height: 1;
+   text-align: center;
+
+   transform: translateY(1px);
+
 }

@@ -97,7 +97,7 @@ $result = $conn->query("SELECT * FROM products");
                         alt="<?php echo htmlspecialchars($product['name']); ?>">
                      <p class="ProductName"><?php echo htmlspecialchars($product['name']); ?></p>
                      <p class="ProductPrice"><?php echo number_format($product['price']); ?> تومان</p>
-                     <button class="AddToCartBtn">افزودن به سبد خرید</button>
+                     <button onclick="addToCart(<?php echo $product['id']; ?>)" class="AddToCartBtn">افزودن به سبد خرید</button>
                   </div>
                <?php endwhile; ?>
 
