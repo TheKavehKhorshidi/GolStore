@@ -63,26 +63,26 @@ $result = $conn->query("SELECT * FROM products");
          <!------------------------------------------------ Categories ------------------------------------------------>
          <h3 class="section-title">دسته بندی ها</h3>
          <div class="CategoriesContainer">
-            <div class="category">
+            <a href="<?php echo $baseUrl; ?>php/products/products.php" class="category">
                <img class="CategoriesImg" src="image/Categories/McQueens12.04.2022_BT10740_PurpleVase.jpg" alt="">
                <p class="CategoriesTitle">همه محصولات</p>
-            </div>
+            </a>
             <!--  -->
-            <a href="php/products/products.php?category=<?php echo urlencode('گیاهان آپارتمانی'); ?>" class="category">
+            <a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('گیاهان آپارتمانی'); ?>" class="category">
                <img class="CategoriesImg" src="image/Categories/Picture3_82df690a-d71d-4429-9c2b-62b3cfba5137.jpg"
                   alt="">
                <p class="CategoriesTitle">گل های آپارتمانی</p>
             </a>
             <!--  -->
-            <div class="category">
+            <a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('باکس گل'); ?>" class="category">
                <img class="CategoriesImg" src="image/Categories/APC_0463-768x768.jpg" alt="">
 
                <p class="CategoriesTitle">باکس گل</p>
-            </div>
-            <div class="category">
+            </a>
+            <a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('دسته گل'); ?>" class="category">
                <img class="CategoriesImg" src="image/Categories/McQueens_12_01_2022_BT6341.jpg" alt="">
                <p class="CategoriesTitle">دسته گل</p>
-            </div>
+            </a>
          </div>
 
          <!------------------------------------------------ Best-selling ------------------------------------------------>

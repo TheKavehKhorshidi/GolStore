@@ -14,15 +14,9 @@
       <div class="headerLinksContainer">
          <div class="headerLink"><a href="<?php echo $baseUrl; ?>index.php">خانه</a></div>
          <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/products/products.php">محصولات</a></div>
-         <div class="headerLink"><a
-               href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('گیاهان آپارتمانی'); ?>">گیاهان
-               آپارتمانی</a></div>
-         <div class="headerLink"><a
-               href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('دسته گل'); ?>">دسته
-               گل</a></div>
-         <div class="headerLink"><a
-               href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('باکس گل'); ?>">باکس
-               گل</a></div>
+         <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('گیاهان آپارتمانی'); ?>">گیاهان آپارتمانی</a></div>
+         <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('باکس گل'); ?>">باکس گل</a></div>
+         <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('دسته گل'); ?>">دسته گل</a></div>
          <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/about/about.php">تماس با ما</a></div>
       </div>
 
