@@ -107,8 +107,8 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
             <h3 class="section-title">محصولات پر فروش</h3>
 
             <div class="ProductsGrid">
-
-               <?php while ($product = $result->fetch_assoc()): ?>
+               <!-- حلقه -->
+               <?php while ($product = $result->fetch_assoc()): ?> 
 
                   <div class="ProductCard">
 
@@ -199,6 +199,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
 
    <!-- footer -->
    <?php include 'partials/footer/footer.php'; ?> <!--  نمایش فوتر سایت -->
+   
    
    <script src="js/slider/slider.js"></script> <!-- کد های جاوااسکریپت اسلایدر -->
 
