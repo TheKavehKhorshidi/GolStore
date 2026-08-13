@@ -117,14 +117,12 @@
    left: 0;
    width: 290px;
    box-sizing: border-box;
+   padding: 12px;
 
    text-align: center;
-
    background: #ffffff;
    border-radius: 14px;
    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-   padding: 12px;
 
    display: flex;
    flex-direction: column;
@@ -233,8 +231,9 @@
    background: #5a7b4d;
 }
 
-
-/* این استایل رو به فایل frontend/css/homeStyles/header.css اضافه کن */
+/* =========================
+   Cart
+========================= */
 
 .cartIconWrapper {
    position: relative;
@@ -274,5 +273,4 @@
    text-align: center;
 
    transform: translateY(1px);
-
 }

@@ -1,9 +1,11 @@
-<?php session_start(); ?>
+<?php session_start(); ?> <!-- اطلاعات مربوط به کاربر را بین صفحات مختلف سایت به خاطر بسپارد -->
+
 
 <header class="site-header">
 
    <div class="headerLogoAndLinkContainer">
 
+      <!-- logo -->
       <div class="logo">
          <img src="<?php echo $baseUrl; ?>image/logo/rose.png" alt="GolStore Logo" class="logoImage">
          <div class="logoText">
@@ -11,6 +13,7 @@
          </div>
       </div>
 
+      <!-- header links -->
       <div class="headerLinksContainer">
          <div class="headerLink"><a href="<?php echo $baseUrl; ?>index.php">خانه</a></div>
          <div class="headerLink"><a href="<?php echo $baseUrl; ?>php/products/products.php">محصولات</a></div>
@@ -26,7 +29,6 @@
    <div class="headerIconsContainer">
 
       <!-- Cart -->
-
       <div class="cartIconWrapper">
          <a href="<?php echo $baseUrl; ?>php/cart/cart.php">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -40,9 +42,7 @@
          </a>
       </div>
 
-
       <!-- User -->
-
       <div class="UserMenu">
 
          <div class="UserButton">
@@ -105,8 +105,8 @@
 
       </div>
 
-
    </div>
 
-   <script src="<?php echo $baseUrl; ?>js/cart/cart.js"></script>
+   <script src="<?php echo $baseUrl; ?>js/cart/cart.js"></script> <!-- فایل جاوااسکرپتی سبد خرید -->
+   
 </header>

@@ -1,4 +1,4 @@
-<!-- frontend/partials/footer/footer.php -->
+
 <footer class="SiteFooter">
    <div class="FooterTop">
 
@@ -7,8 +7,11 @@
             <h4 class="FooterLogo">گل استور</h4>
             <img src="<?php echo $baseUrl; ?>image/logo/rose.png" alt="GolStore Logo" class="logoImage">
          </div>
-         <p class="FooterDesc">ما عاشق گیاهیم و می‌خوایم این عشق رو با شما هم شریک بشیم. بهترین گیاهان رو مستقیم دم
-            خونه‌تون می‌رسونیم.</p>
+
+         <p class="FooterDesc">
+            ما عاشق گیاهیم و می‌خوایم این عشق رو با شما هم شریک بشیم. بهترین گیاهان رو مستقیم دم خونه‌تون می‌رسونیم.
+         </p>
+
          <div class="FooterSocial">
             <a href="#" class="SocialIcon" aria-label="اینستاگرام">
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -17,12 +20,14 @@
                   <circle cx="17.5" cy="6.5" r="1" />
                </svg>
             </a>
+
             <a href="#" class="SocialIcon" aria-label="تلگرام">
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M22 2L11 13" />
                   <path d="M22 2l-7 20-4-9-9-4z" />
                </svg>
             </a>
+
             <a href="#" class="SocialIcon" aria-label="واتساپ">
                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path

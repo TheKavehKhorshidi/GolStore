@@ -28,16 +28,16 @@
 }
 
 .FooterLogo {
+   margin: 0 0 14px;
+   color: #fff;
    font-size: 22px;
    font-weight: 800;
-   color: #fff;
-   margin: 0 0 14px;
 }
 
 .FooterDesc {
+   margin: 0 0 20px;
    color: #b9c4b4;
    line-height: 1.9;
-   margin: 0 0 20px;
 }
 
 .FooterSocial {
@@ -48,11 +48,11 @@
 .SocialIcon {
    width: 36px;
    height: 36px;
-   border-radius: 50%;
-   background: rgba(255, 255, 255, 0.08);
    display: flex;
    align-items: center;
    justify-content: center;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, 0.08);
    color: #e7ede4;
    transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -68,19 +68,19 @@
 }
 
 .FooterTitle {
+   margin: 0 0 18px;
    color: #fff;
    font-size: 16px;
    font-weight: 700;
-   margin: 0 0 18px;
 }
 
 .FooterLinks {
-   list-style: none;
-   padding: 0;
-   margin: 0;
    display: flex;
    flex-direction: column;
    gap: 12px;
+   padding: 0;
+   margin: 0;
+   list-style: none;
 }
 
 .FooterLinks a {
@@ -107,27 +107,25 @@
    font-size: 13px;
 }
 
-.logoContainer{
+.logoContainer {
    display: flex;
-   align-content: center;
+   align-items: center;
 }
 
-.logo{
+.logo {
    display: flex;
    align-items: center;
-   align-content: center;
    justify-content: center;
+   color: #333333;
    font-size: 24px;
    font-weight: bold;
-   color: #333333;
-   display: flex;
-   align-items: center;
 }
-.logo:hover{
+
+.logo:hover {
    color: #a90b23;
 }
 
-.logoImage{
+.logoImage {
    width: 40px;
    height: 40px;
 }
