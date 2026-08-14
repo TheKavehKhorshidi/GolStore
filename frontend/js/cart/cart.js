@@ -129,6 +129,7 @@ function updateCartBadge() {
 
 
 
+
 // دریافت اطلاعات محصولات از API
 async function fetchCartProductsInfo() {
    const cart = getCart();
