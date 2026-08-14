@@ -100,6 +100,7 @@ function updateQuantity(productId, newQuantity) {
    updateCartBadge();
 }
 
+
 // حذف محصول از سبد
 function removeFromCart(productId) {
    const cart = getCart().filter(item => item.id !== productId); // قیلتر کن همه رو به جز ایدی یه بهت میدم
