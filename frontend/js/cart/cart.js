@@ -109,6 +109,8 @@ function clearCart() {
 }
 
 
+
+// ___________________________________ بخش  تعداد محصولات - عدد کنار ایکون سبد خرید ___________________________________
 // دریافت تعداد کل محصولات
 function getCartItemCount() {
    return getCart().reduce((sum, item) => sum + item.quantity, 0);
@@ -122,6 +124,9 @@ function updateCartBadge() {
       badge.textContent = getCartItemCount();
    }
 }
+// ___________________________________________________________________________________________________________________
+
+
 
 // دریافت اطلاعات محصولات از API
 async function fetchCartProductsInfo() {
