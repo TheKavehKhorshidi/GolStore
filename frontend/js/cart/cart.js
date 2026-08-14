@@ -21,6 +21,7 @@ function saveCart(cart) {
    localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
+
 // افزودن محصول به سبد
 function addToCart(productId, quantity = 1) {
    const cart = getCart(); // ایدی کارت ها رو از لوکال استوریج بیار
