@@ -15,6 +15,7 @@ function getCart() {
    return cart ? JSON.parse(cart) : [];
 }
 
+
 // ذخیره محصول در سبد خرید - ذخیره در لوکال استوریج
 function saveCart(cart) {
    localStorage.setItem(CART_KEY, JSON.stringify(cart));
