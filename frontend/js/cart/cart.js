@@ -38,6 +38,7 @@ function addToCart(productId, quantity = 1) {
    showCartToast('به سبد خرید اضافه شد'); // فانکشن  پیام اضافه شدن محصول به سبد خرید
 }
 
+
 // نمایش پیام سبد خرید
 function showCartToast(message) {
    let toast = document.getElementById('cart-toast');
