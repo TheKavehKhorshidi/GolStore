@@ -81,6 +81,7 @@ function showCartToast(message) {
    }, 1800);
 }
 
+
 // تغییر تعداد محصول
 function updateQuantity(productId, newQuantity) {
    let cart = getCart(); // گرفتن کل محصولات
