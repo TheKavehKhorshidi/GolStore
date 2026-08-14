@@ -109,6 +109,7 @@ function removeFromCart(productId) {
    updateCartBadge(); // اپدیت تعداد محصولات یا مون بدج
 }
 
+
 // خالی کردن سبد
 // برای وفتی که خرید موفقیت امیز بود
 function clearCart() {
