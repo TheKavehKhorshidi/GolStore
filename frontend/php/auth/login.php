@@ -9,74 +9,74 @@ $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
+   $email = trim($_POST["email"]);
+   $password = $_POST["password"];
 
 
-    // بررسی خالی نبودن فیلدها
-    if (empty($email) || empty($password)) {
+   // بررسی خالی نبودن فیلدها
+   if (empty($email) || empty($password)) {
 
-        $error = "لطفاً ایمیل و رمز عبور را وارد کنید.";
+      $error = "لطفاً ایمیل و رمز عبور را وارد کنید.";
 
-    } else {
+   } else {
 
-        // پیدا کردن کاربر
-        $stmt = $conn->prepare(
-            "SELECT id, name, email, password, role
+      // پیدا کردن کاربر
+      $stmt = $conn->prepare(
+         "SELECT id, name, email, password, role
              FROM users
              WHERE email = ?"
-        );
+      );
 
-        $stmt->bind_param("s", $email);
+      $stmt->bind_param("s", $email);
 
-        $stmt->execute();
+      $stmt->execute();
 
-        $result = $stmt->get_result();
+      $result = $stmt->get_result();
 
 
-        // بررسی وجود کاربر
-        if ($result->num_rows === 0) {
+      // بررسی وجود کاربر
+      if ($result->num_rows === 0) {
+
+         $error = "ایمیل یا رمز عبور اشتباه است.";
+
+      } else {
+
+         // دریافت اطلاعات کاربر
+         $user = $result->fetch_assoc();
+
+
+         // بررسی رمز عبور
+         if (!password_verify($password, $user["password"])) {
 
             $error = "ایمیل یا رمز عبور اشتباه است.";
 
-        } else {
+         } else {
 
-            // دریافت اطلاعات کاربر
-            $user = $result->fetch_assoc();
+            // ساخت Session
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["user_name"] = $user["name"];
+            $_SESSION["user_email"] = $user["email"];
+            $_SESSION["user_role"] = $user["role"];
 
 
-            // بررسی رمز عبور
-            if (!password_verify($password, $user["password"])) {
+            // ورود موفق
+            if ($user["role"] === "admin") {
 
-                $error = "ایمیل یا رمز عبور اشتباه است.";
+               header("Location: ../../index.php");
+               exit;
 
             } else {
 
-                // ساخت Session
-                $_SESSION["user_id"] = $user["id"];
-                $_SESSION["user_name"] = $user["name"];
-                $_SESSION["user_email"] = $user["email"];
-                $_SESSION["user_role"] = $user["role"];
-
-
-                // ورود موفق
-                if ($user["role"] === "admin") {
-
-                    header("Location: ../../index.php");
-                    exit;
-
-                } else {
-
-                    header("Location: ../../index.php");
-                    exit;
-
-                }
+               header("Location: ../../index.php");
+               exit;
 
             }
-        }
 
-        $stmt->close();
-    }
+         }
+      }
+
+      $stmt->close();
+   }
 }
 
 ?>
@@ -109,11 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
          <div class="AuthLogo">
 
-            <img
-               class="logoImage"
-               src="../../image/logo/rose.png"
-               alt=""
-            >
+            <img class="logoImage" src="../../image/logo/rose.png" alt="">
 
             <div>
 
@@ -163,14 +159,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                   ایمیل
                </label>
 
-               <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="example@gmail.com"
-                  autocomplete="email"
-                  value="<?php echo htmlspecialchars($email ?? ''); ?>"
-               >
+               <input type="email" id="email" name="email" placeholder="example@gmail.com" autocomplete="email"
+                  value="<?php echo htmlspecialchars($email ?? ''); ?>">
 
             </div>
 
@@ -183,23 +173,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                   رمز عبور
                </label>
 
-               <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="رمز عبور خود را وارد کنید"
-                  autocomplete="current-password"
-               >
+               <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید"
+                  autocomplete="current-password">
 
             </div>
 
 
             <!-- Button -->
 
-            <button
-               type="submit"
-               class="AuthButton"
-            >
+            <button type="submit" class="AuthButton">
                ورود به حساب
             </button>
 

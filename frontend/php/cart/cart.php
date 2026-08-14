@@ -13,7 +13,7 @@ require '../../partials/config.php';
 
    <link rel="stylesheet" href="/shop/frontend/css/style.css">
    <link rel="stylesheet" href="/shop/frontend/css/cart/cart.css">
-   <link rel="stylesheet" href="/shop/frontend/css/homeStyles/header.css">
+   <link rel="stylesheet" href="/shop/frontend/css/header/header.css">
 </head>
 
 <body>

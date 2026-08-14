@@ -131,7 +131,6 @@
    opacity: 0;
    visibility: hidden;
    transform: translateY(-5px);
-
    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
    z-index: 999;
 }

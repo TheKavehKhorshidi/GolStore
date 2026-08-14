@@ -10,8 +10,8 @@ require '../../partials/config.php';
    <meta charset="UTF-8">
    <title>درباره ما - GolStore</title>
    <link rel="stylesheet" href="../../css/style.css">
-   <link rel="stylesheet" href="../../css/homeStyles/header.css">
-   <link rel="stylesheet" href="../../css/homeStyles/footer.css">
+   <link rel="stylesheet" href="../../css/header/header.css">
+   <link rel="stylesheet" href="../../css/footer/footer.css">
    <link rel="stylesheet" href="../../css/aboutStyles/about.css">
 </head>
 

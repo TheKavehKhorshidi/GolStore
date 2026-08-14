@@ -24,9 +24,9 @@ if ($category) {
    <meta charset="UTF-8">
    <title>محصولات - GolStore</title>
    <link rel="stylesheet" href="../../css/style.css">
-   <link rel="stylesheet" href="../../css/homeStyles/header.css">
-   <link rel="stylesheet" href="../../css/homeStyles/Best-selling.css">
-   <link rel="stylesheet" href="../../css/homeStyles/footer.css">
+   <link rel="stylesheet" href="../../css/header/header.css">
+   <link rel="stylesheet" href="../../css/home/Best-selling.css">
+   <link rel="stylesheet" href="../../css/footer/footer.css">
 </head>
 
 <body>
