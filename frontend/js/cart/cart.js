@@ -7,6 +7,8 @@ const API_URL = '/shop/frontend/php/cart/cart_get.php';
 
 //  ------------------------- localStorage -------------------------
 
+
+
 // دریافت سبد خرید
 function getCart() {
    const cart = localStorage.getItem(CART_KEY);
