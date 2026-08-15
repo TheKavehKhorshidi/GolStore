@@ -1,6 +1,7 @@
 <footer class="SiteFooter">
    <div class="FooterTop">
 
+
       <div class="FooterCol FooterBrand">
          <div class="logoContainer">
             <h4 class="FooterLogo">گل استور</h4>
@@ -11,6 +12,7 @@
             ما عاشق گیاهیم و می‌خوایم این عشق رو با شما هم شریک بشیم. بهترین گیاهان رو مستقیم دم خونه‌تون می‌رسونیم.
          </p>
 
+         <!-- بخش مدیا -->
          <div class="FooterSocial">
 
             <a href="#" class="SocialIcon" aria-label="اینستاگرام">
@@ -42,20 +44,9 @@
       <div class="FooterCol">
          <h5 class="FooterTitle">دسترسی سریع</h5>
          <ul class="FooterLinks">
-            <li><a href="#">صفحه اصلی</a></li>
-            <li><a href="#">محصولات</a></li>
-            <li><a href="#">درباره ما</a></li>
-            <li><a href="#">تماس با ما</a></li>
-         </ul>
-      </div>
-
-      <div class="FooterCol">
-         <h5 class="FooterTitle">خدمات مشتریان</h5>
-         <ul class="FooterLinks">
-            <li><a href="#">راهنمای خرید</a></li>
-            <li><a href="#">شرایط ارسال</a></li>
-            <li><a href="#">ضمانت بازگشت</a></li>
-            <li><a href="#">سوالات متداول</a></li>
+            <li><a href="<?php echo $baseUrl; ?>index.php">صفحه اصلی</a></li>
+            <li><a href="<?php echo $baseUrl; ?>php/products/products.php">محصولات</a></li>
+            <li><a href="<?php echo $baseUrl; ?>php/about/about.php">تماس با ما</a></li>
          </ul>
       </div>
 
