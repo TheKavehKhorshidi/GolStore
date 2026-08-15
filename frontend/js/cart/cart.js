@@ -9,7 +9,7 @@ const API_URL = '/shop/frontend/php/cart/cart_get.php';
 
 
 
-// دریافت سبد خرید
+// دریافت دیتای سبد خرید
 function getCart() {
    const cart = localStorage.getItem(CART_KEY);
    return cart ? JSON.parse(cart) : [];
@@ -92,7 +92,7 @@ function updateQuantity(productId, newQuantity) {
       const item = cart.find(item => item.id === productId); // ایا ایتم وجود دارد
 
       if (item) { //  اگر وجود داشت تهداد محصول برابر مقدار جدید میشه
-         item.quantity = newQuantity; 
+         item.quantity = newQuantity;
       }
    }
 
@@ -106,6 +106,7 @@ function removeFromCart(productId) {
    const cart = getCart().filter(item => item.id !== productId); // قیلتر کن همه رو به جز ایدی یه بهت میدم
 
    saveCart(cart); //اپدیت کار ها
+   //showCartBadge(); // اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
    updateCartBadge(); // اپدیت تعداد محصولات یا مون بدج
 }
 
@@ -115,6 +116,7 @@ function removeFromCart(productId) {
 function clearCart() {
    localStorage.removeItem(CART_KEY);
    updateCartBadge();
+   //showCartBadge(); // اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
 }
 
 
@@ -126,13 +128,27 @@ function getCartItemCount() {
    return getCart().reduce((sum, item) => sum + item.quantity, 0);
 }
 
+// اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
+// function showCartBadge() {
+//    if (getCart().length === 0) {
+//       document.querySelector(".cart-count-container").remove();
+//    }
+// }
+
 // آپدیت عدد کنار آیکون سبد یا همون بدج
 function updateCartBadge() {
-   const badge = document.getElementById('cart-count');
 
-   if (badge) {
-      badge.textContent = getCartItemCount();
+   let badge = document.getElementById('cart-count');
+
+   if (count === 0) {
+      if (badge) {
+         badge.parentElement.remove();
+      }
+      return;
    }
+
+   const badge = document.getElementById('cart-count');
+   if (badge) { badge.textContent = getCartItemCount() }
 }
 // ___________________________________________________________________________________________________________________
 

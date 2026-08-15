@@ -56,7 +56,6 @@
 
          <div class="UserDropdown">
 
-            <!--  -->
             <?php if (isset($_SESSION["user_id"])): ?>
 
                <div class="UserInfo">
