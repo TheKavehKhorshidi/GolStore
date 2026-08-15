@@ -67,6 +67,7 @@
 }
 
 .slider-img-btn {
+   cursor: pointer;
   flex-shrink: 0;
   background-color: #ffffff;
   color: #222;

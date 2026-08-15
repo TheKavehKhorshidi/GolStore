@@ -29,7 +29,8 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
 <body>
 
    <!-- header -->
-   <?php include 'partials/header/header.php'; ?> <!--  نمایش هدر سایت -->
+   <!--  نمایش هدر سایت -->
+   <?php include 'partials/header/header.php'; ?>
 
    <!-- main -->
    <main>
@@ -47,7 +48,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
                   <img class="slider-img" src="image/poster/1.png" alt="">
                   <div class="slider-item-content">
                      <p>گل های آپارتمانی</p>
-                     <button class="slider-img-btn">مشاهده</button>
+                     <a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('گیاهان آپارتمانی'); ?>" class="slider-img-btn">مشاهده</a>
                   </div>
                </div>
 
@@ -55,7 +56,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
                   <img class="slider-img" src="image/poster/2.jpg" alt="">
                   <div class="slider-item-content">
                      <p>باکس گل</p>
-                     <button class="slider-img-btn">مشاهده</button>
+                     <a href="<?php echo $baseUrl; ?>php/products/products.php?category=<?php echo urlencode('باکس گل'); ?>" class="slider-img-btn">مشاهده</a>
                   </div>
                </div>
 
@@ -63,7 +64,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
                   <img class="slider-img" src="image/poster/3.png" alt="">
                   <div class="slider-item-content">
                      <p>همه محصولات</p>
-                     <button class="slider-img-btn">مشاهده</button>
+                     <a href="<?php echo $baseUrl; ?>php/products/products.php" class="slider-img-btn">مشاهده</a>
                   </div>
                </div>
 
