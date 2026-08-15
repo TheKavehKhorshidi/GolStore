@@ -128,29 +128,23 @@ function getCartItemCount() {
    return getCart().reduce((sum, item) => sum + item.quantity, 0);
 }
 
-// اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
-// function showCartBadge() {
-//    if (getCart().length === 0) {
-//       document.querySelector(".cart-count-container").remove();
-//    }
-// }
-
 // آپدیت عدد کنار آیکون سبد یا همون بدج
 function updateCartBadge() {
 
    let badge = document.getElementById('cart-count');
+   let badgeContainer = document.getElementById('badgeContainer');
+
+   const count = getCartItemCount();
 
    if (count === 0) {
-      if (badge) {
-         badge.parentElement.remove();
-      }
-      return;
+      badgeContainer.style.display = "none";
+   } else {
+      badgeContainer.style.display = "flex";
+      badge.textContent = count;
    }
-
-   const badge = document.getElementById('cart-count');
-   if (badge) { badge.textContent = getCartItemCount() }
 }
 // ___________________________________________________________________________________________________________________
+
 
 
 
