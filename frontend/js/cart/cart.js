@@ -1,25 +1,23 @@
-// مدیریت سبد خرید با لوکال استوریج و ای چی ای
 const CART_KEY = 'shop_cart';
 const API_URL = '/shop/frontend/php/cart/cart_get.php';
 
 
 
 
-//  ------------------------- localStorage -------------------------
 
-
-
+// _____________________________________________ localStorage _______________________________________________
 // دریافت دیتای سبد خرید
 function getCart() {
    const cart = localStorage.getItem(CART_KEY);
    return cart ? JSON.parse(cart) : [];
 }
 
-
 // ذخیره محصول در سبد خرید - ذخیره در لوکال استوریج
 function saveCart(cart) {
    localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
+// ___________________________________________________________________________________________________________________
+
 
 
 
@@ -117,7 +115,6 @@ function removeFromCart(productId) {
 
 
 // خالی کردن سبد
-// برای وفتی که خرید موفقیت امیز بود
 function clearCart() {
    localStorage.removeItem(CART_KEY);
    updateCartBadge();
@@ -132,10 +129,6 @@ function clearCart() {
 function getCartItemCount() {
    return getCart().reduce((sum, item) => sum + item.quantity, 0);
 }
-
-// ___________________________________________________________________________________________________________________
-
-
 
 // آپدیت عدد کنار آیکون سبد یا همون بدج
 function updateCartBadge() {
@@ -152,6 +145,7 @@ function updateCartBadge() {
       badge.textContent = count;
    }
 }
+// ___________________________________________________________________________________________________________________
 
 
 
