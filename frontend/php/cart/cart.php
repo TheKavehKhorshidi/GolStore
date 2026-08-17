@@ -53,7 +53,7 @@ require '../../partials/config.php';
 
          <!-- محصولات -->
          <div id="cart-items" class="cart-items"></div>
-
+         
          <!-- خلاصه سفارش -->
          <aside id="cart-summary" class="cart-summary" style="display: none;">
             <h2>خلاصه سفارش</h2>

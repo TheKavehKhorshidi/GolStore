@@ -4,7 +4,6 @@ const API_URL = '/shop/frontend/php/cart/cart_get.php';
 
 
 
-
 // _____________________________________________ localStorage _______________________________________________
 // دریافت دیتای سبد خرید
 function getCart() {
@@ -21,7 +20,7 @@ function saveCart(cart) {
 
 
 
-// ___________________________________  بخش افزودن به سبد خرید و پیام اضافه شدن به سبد خرید___________________________________
+// ___________________________________  بخش افزودن به سبد خرید و پیام اضافه شدن به سبد خرید ___________________________________
 // افزودن محصول به سبد
 function addToCart(productId, quantity = 1) {
    const cart = getCart(); // ایدی کارت ها رو از لوکال استوریج بیار
@@ -84,6 +83,7 @@ function showCartToast(message) {
 
 
 
+// ___________________________________  بخش کنترل سبد خرید - اقزایش تعداد ، کاهش تعداد و پاک کردن کامل محصول ___________________________________
 // کم و زیاد کردن تعداد محصول
 function updateQuantity(productId, newQuantity) {
    let cart = getCart(); // گرفتن کل محصولات
@@ -102,8 +102,6 @@ function updateQuantity(productId, newQuantity) {
    updateCartBadge();
 }
 
-
-
 // حذف محصول از سبد
 function removeFromCart(productId) {
    const cart = getCart().filter(item => item.id !== productId); // قیلتر کن همه رو به جز ایدی یه بهت میدم
@@ -113,13 +111,13 @@ function removeFromCart(productId) {
    updateCartBadge(); // اپدیت تعداد محصولات یا مون بدج
 }
 
-
 // خالی کردن سبد
 function clearCart() {
    localStorage.removeItem(CART_KEY);
    updateCartBadge();
    //showCartBadge(); // اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
 }
+// ___________________________________________________________________________________________________________________
 
 
 
@@ -146,6 +144,7 @@ function updateCartBadge() {
    }
 }
 // ___________________________________________________________________________________________________________________
+
 
 
 

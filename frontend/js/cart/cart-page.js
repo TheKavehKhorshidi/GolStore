@@ -8,9 +8,12 @@ async function renderCartPage() {
 
    const products = await fetchCartProductsInfo(); // محصولات
 
+   if (products.length <= 0) {
+      itemsEl.style.display = 'none';
+   }
 
    // لودینگ در حالت عادی نمایش داده نشود
-   loadingEl.style.display = 'none'; 
+   loadingEl.style.display = 'none';
 
    // نمایش سبد خالی
    // اگر هیچ محصولی اضافه نشده بود بخش (سبد خالی رو نشون بده) و بخش خلاصه محصولا رو نشون نده
@@ -23,9 +26,10 @@ async function renderCartPage() {
    emptyEl.style.display = 'none';
    itemsEl.style.display = 'flex';
 
+   // قسمت کل محصولات در سبد خرید
    let total = 0;
 
-
+   // ساخت المنت برای هر محصول
    itemsEl.innerHTML = products.map(product => {
       const lineTotal = product.price * product.quantity;
 
@@ -75,6 +79,7 @@ async function renderCartPage() {
             return;
          }
 
+         // اگر دیتا اکشن دکمه برابر بود با زیاد کردن تو برای مون یک عدد زیاد کن در غیر این صورت یه عدد کم کن
          const newQuantity =
             button.dataset.action === 'increase'
                ? item.quantity + 1
