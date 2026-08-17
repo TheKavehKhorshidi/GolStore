@@ -2,14 +2,15 @@
 require '../../../backend/db.php';
 require '../../partials/config.php';
 
-// اگه توی آدرس چیزی مثل ?category=... بود، بگیرش. اگه نبود، مقدارش می‌شه null
+// گرفتن دسته‌بندی از آدرس صفحه
 $category = $_GET['category'] ?? null;
-
+// کوئری گرفتن از دیتابیس
 if ($category) {
    // فقط محصولات همون دسته رو بیار
    $stmt = $conn->prepare("SELECT * FROM products WHERE category = ?");
    $stmt->bind_param("s", $category);
    $stmt->execute();
+   // گرفتن دستا با توجه به دسته بندی 
    $result = $stmt->get_result();
 } else {
    // هیچ دسته‌ای انتخاب نشده، همه محصولات رو بیار
@@ -46,7 +47,7 @@ if ($category) {
          </h3>
 
          <div class="ProductsGrid">
-            <?php while ($product = $result->fetch_assoc()): ?>
+            <?php while ($product = $result->fetch_assoc()): ?> <!-- یک ردیف از دیتابیس رو به صورت آرایه بردار -->
                <div class="ProductCard">
                   <img class="ProductImg" src="../../<?php echo htmlspecialchars($product['image']); ?>"
                      alt="<?php echo htmlspecialchars($product['name']); ?>">
