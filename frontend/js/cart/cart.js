@@ -22,6 +22,8 @@ function saveCart(cart) {
 }
 
 
+
+// ___________________________________  بخش افزودن به سبد خرید و پیام اضافه شدن به سبد خرید___________________________________
 // افزودن محصول به سبد
 function addToCart(productId, quantity = 1) {
    const cart = getCart(); // ایدی کارت ها رو از لوکال استوریج بیار
@@ -33,11 +35,10 @@ function addToCart(productId, quantity = 1) {
       cart.push({ id: productId, quantity }); // اگر محصول وجود نداشت محصول به سبد خرید اضافه کن
    }
 
-   saveCart(cart); //فانکشن اپدیت کردن لوکال استوریج
+   saveCart(cart); //فانکشن دادن دیتای جدید یه لوکال استوریج
    updateCartBadge();  //فانکشن اپدیت کردن شمارنده سفارش ها یا همون بدج
    showCartToast('به سبد خرید اضافه شد'); // فانکشن  پیام اضافه شدن محصول به سبد خرید
 }
-
 
 // نمایش پیام سبد خرید
 function showCartToast(message) {
@@ -80,9 +81,12 @@ function showCartToast(message) {
       toast.style.transform = 'translateX(-50%) translateY(-20px)';
    }, 1800);
 }
+// ___________________________________________________________________________________________________________________
 
 
-// تغییر تعداد محصول
+
+
+// کم و زیاد کردن تعداد محصول
 function updateQuantity(productId, newQuantity) {
    let cart = getCart(); // گرفتن کل محصولات
 
@@ -99,6 +103,7 @@ function updateQuantity(productId, newQuantity) {
    saveCart(cart);
    updateCartBadge();
 }
+
 
 
 // حذف محصول از سبد
@@ -128,6 +133,10 @@ function getCartItemCount() {
    return getCart().reduce((sum, item) => sum + item.quantity, 0);
 }
 
+// ___________________________________________________________________________________________________________________
+
+
+
 // آپدیت عدد کنار آیکون سبد یا همون بدج
 function updateCartBadge() {
 
@@ -143,9 +152,6 @@ function updateCartBadge() {
       badge.textContent = count;
    }
 }
-// ___________________________________________________________________________________________________________________
-
-
 
 
 
