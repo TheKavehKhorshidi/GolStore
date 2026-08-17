@@ -1,5 +1,3 @@
-<!-- وصل شدن به دیتابیس -->
-
 <?php
 $host    = "localhost";
 $db_user = "root";
