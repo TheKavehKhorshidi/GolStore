@@ -112,16 +112,18 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
                <?php while ($product = $result->fetch_assoc()): ?> 
 
                   <div class="ProductCard">
-
+                     <!-- image -->
                      <img
                         class="ProductImg"
-                        src="<?php echo htmlspecialchars($product['image']); ?>"
+                        src="<?php echo htmlspecialchars($product['image']); ?>" 
                         alt="<?php echo htmlspecialchars($product['name']); ?>">
-
+                        
+                     <!-- name -->
                      <p class="ProductName">
                         <?php echo htmlspecialchars($product['name']); ?>
                      </p>
 
+                     <!-- product -->
                      <p class="ProductPrice">
                         <?php echo number_format($product['price']); ?> تومان
                      </p>
