@@ -1,0 +1,182 @@
+/* ------------------- best selling ------------------- */
+.ProductsGrid {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: start;
+   gap: 24px;
+   background:#6b8f5c;
+   border-radius: 15px;
+   padding: 30px;
+}
+
+.ProductCard {
+   background: #fff;
+   border: 1px solid #eee;
+   border-radius: 18px;
+   width: 230px;
+   padding: 16px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ProductCard:hover {
+   transform: translateY(-6px);
+   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.ProductImg {
+   width: 100%;
+   height: 180px;
+   object-fit: cover;
+   border-radius: 12px;
+   margin-bottom: 14px;
+}
+
+.ProductName {
+   font-size: 16px;
+   font-weight: 600;
+   color: #1a1a1a;
+   margin: 0 0 6px;
+}
+
+.ProductPrice {
+   font-size: 15px;
+   font-weight: 700;
+   color: #6b8f5c;
+   margin: 0 0 14px;
+}
+
+.AddToCartBtn {
+   width: 100%;
+   padding: 10px 0;
+   background: #6b8f5c;
+   color: #fff;
+   border: none;
+   border-radius: 999px;
+   font-size: 14px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: background 0.2s ease;
+}
+
+.AddToCartBtn:hover {
+   background: #587349;
+}
+
+/* ------------------- categories ------------------- */
+.CategoriesContainer {
+   display: flex;
+   gap: 20px;
+   justify-content: start;
+}
+
+.category {
+   background: #fff;
+   border: 1px solid #eee;
+   border-radius: 20px;
+   width: 220px;
+   height: 220px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category:hover {
+   transform: translateY(-6px);
+   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.CategoriesImg {
+   border: none;
+   object-fit: cover;
+   width: 130px;
+   height: 130px;
+   border-radius: 50%;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.CategoriesTitle {
+   text-align: center;
+   font-weight: 600;
+   font-size: 15px;
+   color: #222;
+   margin: 0;
+}
+/* ------------------- whySection ------------------- */
+.WhyContainer {
+   direction: rtl;
+   background: #e3ede2;
+   padding: 70px 30px;
+   text-align: center;
+   margin-top: 50px;
+   margin-bottom: 80px;
+}
+
+.WhyTitle h3 {
+   font-size: 28px;
+   font-weight: 800;
+   color: #1a1a1a;
+   margin-bottom: 12px;
+}
+
+.WhyTitle p {
+   color: #555;
+   font-size: 17px;
+   margin-bottom: 50px;
+}
+
+.WhyDescriptionContainer {
+   max-width: 1100px;
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+}
+
+.WhyRow {
+   display: flex;
+   justify-content: space-between;
+   gap: 40px;
+   flex-wrap: wrap;
+}
+
+.WhyItem {
+   flex: 1;
+   min-width: 280px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   text-align: right;
+   color: black;
+}
+
+.WhyIcon {
+   flex-shrink: 0;
+   width: 34px;
+   height: 34px;
+   color: #1a1a1a;
+}
+
+.WhyIcon svg {
+   width: 100%;
+   height: 100%;
+}
+
+.WhyText {
+   font-size: 18px;
+   line-height: 1.9;
+   color: #1a1a1a;
+   margin: 0;
+}
+
+.highlight {
+   color: #6b8f5c;
+   font-weight: 700;
+}
+

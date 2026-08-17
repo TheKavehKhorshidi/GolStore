@@ -20,10 +20,8 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
    <link rel="stylesheet" href="css/header/header.css"> <!-- header -->
    <link rel="stylesheet" href="css/footer/footer.css"> <!-- footer -->
 
-   <link rel="stylesheet" href="css/home/slider.css"> <!-- home - slider -->
-   <link rel="stylesheet" href="css/home/categories.css"> <!-- home - categories -->
-   <link rel="stylesheet" href="css/home/whySection.css"> <!-- home - whySection -->
-   <link rel="stylesheet" href="css/home/Best-selling.css"> <!-- home - Best-selling -->
+   <link rel="stylesheet" href="css/home/home.css"> <!-- home -->
+   <link rel="stylesheet" href="css/slider/slider.css"> <!-- slider -->
 </head>
 
 <body>
