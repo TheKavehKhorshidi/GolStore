@@ -144,6 +144,11 @@
    text-decoration: none;
 }
 
+.btn-primary{
+   padding: 10px;
+   border-radius: 10px;
+}
+
 .admin-product-img {
    width: 48px;
    height: 48px;
@@ -181,6 +186,7 @@
 
 .admin-form-box {
    max-width: 500px;
+      margin: 0 auto;
 }
 
 .admin-form-box select,
