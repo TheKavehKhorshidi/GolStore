@@ -3,7 +3,7 @@ async function renderCartPage() {
    const itemsEl = document.getElementById('cart-items'); // المنت محصولات 
    const loadingEl = document.getElementById('cart-loading'); // المنت لودینگ
    const emptyEl = document.getElementById('cart-empty'); // المنت وقتی که سبد خرید خالی است
-   const summaryEl = document.getElementById('cart-summary'); // المنت خالصه سفارش ها
+   const summaryEl = document.getElementById('cart-summary'); // المنت خلاصه سفارش ها
 
 
    const products = await fetchCartProductsInfo(); // محصولات
