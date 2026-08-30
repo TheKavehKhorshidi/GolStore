@@ -4,7 +4,7 @@ const API_URL = '/shop/frontend/php/cart/cart_get.php';
 
 
 
-// _____________________________________________ localStorage _______________________________________________
+// ___________________________________________________ localStorage ___________________________________________________
 // دریافت دیتای سبد خرید
 function getCart() {
    const cart = localStorage.getItem(CART_KEY);
@@ -88,7 +88,7 @@ function showCartToast(message) {
 function updateQuantity(productId, newQuantity) {
    let cart = getCart(); // گرفتن کل محصولات
 
-   if (newQuantity <= 0) { // اگر شمارنده برابر یا کمتر از صغر بشه
+   if (newQuantity <= 0) { // اگر شمارنده برابر یا کمتر از صفر بشه
       cart = cart.filter(item => item.id !== productId); // کلا از سبد خرید حرف میشه
    } else { // در غیر این صورت
       const item = cart.find(item => item.id === productId); // ایا ایتم وجود دارد
@@ -107,7 +107,6 @@ function removeFromCart(productId) {
    const cart = getCart().filter(item => item.id !== productId); // قیلتر کن همه رو به جز ایدی یه بهت میدم
 
    saveCart(cart); //اپدیت کار ها
-   //showCartBadge(); // اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
    updateCartBadge(); // اپدیت تعداد محصولات یا مون بدج
 }
 
@@ -115,7 +114,6 @@ function removeFromCart(productId) {
 function clearCart() {
    localStorage.removeItem(CART_KEY);
    updateCartBadge();
-   //showCartBadge(); // اگه محصولای تو سبد خرید نیست عدد کنارش رو با همون بدج رو نشون نده
 }
 // ___________________________________________________________________________________________________________________
 
@@ -148,7 +146,7 @@ function updateCartBadge() {
 
 
 
-// دریافت اطلاعات محصولات از API
+// __________________________________________ دریافت اطلاعات محصولات از ای پی آی ____________________________________________
 async function fetchCartProductsInfo() {
    const cart = getCart();
 
@@ -182,6 +180,10 @@ async function fetchCartProductsInfo() {
       };
    });
 }
+// ___________________________________________________________________________________________________________________
+
+
+
 
 // آپدیت سبد بعد از لود صفحه
 document.addEventListener('DOMContentLoaded', updateCartBadge);
