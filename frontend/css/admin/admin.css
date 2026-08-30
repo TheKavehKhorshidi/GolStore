@@ -1,0 +1,214 @@
+.admin-page {
+   padding: 30px 20px;
+}
+
+/* ============ باکس جستجو ============ */
+.admin-search-box {
+   margin-bottom: 24px;
+}
+
+.admin-search-box input {
+   width: 100%;
+   max-width: 400px;
+   padding: 12px 16px;
+   border: 1px solid #ddd;
+   border-radius: 12px;
+   font-size: 14px;
+   font-family: inherit;
+}
+
+.admin-search-box input:focus {
+   outline: none;
+   border-color: #4f6d43;
+}
+
+/* ============ جدول ============ */
+.admin-table-wrapper {
+   background: #fff;
+   border-radius: 16px;
+   overflow-x: auto;
+   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table {
+   width: 100%;
+   border-collapse: collapse;
+   font-size: 14px;
+}
+
+.admin-table th {
+   text-align: right;
+   padding: 14px 16px;
+   background: #f9f9f9;
+   color: #666;
+   font-weight: 600;
+   font-size: 13px;
+   white-space: nowrap;
+   border-bottom: 1px solid #eee;
+}
+
+.admin-table td {
+   padding: 14px 16px;
+   border-bottom: 1px solid #f2f2f2;
+   white-space: nowrap;
+   color: #333;
+}
+
+.admin-table tbody tr:last-child td {
+   border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+   background: #fafafa;
+}
+
+/* ردیف مخفی‌شده در جستجو */
+.admin-table tbody tr.hidden-row {
+   display: none;
+}
+
+.admin-empty-row {
+   text-align: center !important;
+   color: #999;
+   padding: 30px !important;
+}
+
+/* ============ دراپ‌داون وضعیت ============ */
+.status-select {
+   padding: 6px 10px;
+   border-radius: 8px;
+   border: 1px solid #ddd;
+   font-size: 13px;
+   font-family: inherit;
+   cursor: pointer;
+   background: #fff;
+}
+
+.status-select:focus {
+   outline: none;
+   border-color: #4f6d43;
+}
+
+/* رنگ‌بندی بر اساس وضعیت */
+.status-select[data-status="processing"] {
+   color: #b8860b;
+}
+
+.status-select[data-status="shipped"] {
+   color: #2563eb;
+}
+
+.status-select[data-status="delivered"] {
+   color: #4f6d43;
+}
+
+.status-select[data-status="cancelled"] {
+   color: #d33;
+}
+
+
+/* _______ */
+
+.admin-nav {
+   display: flex;
+   gap: 8px;
+   margin-bottom: 24px;
+   border-bottom: 1px solid #eee;
+}
+
+.admin-nav-item {
+   padding: 10px 20px;
+   font-size: 14px;
+   color: #666;
+   text-decoration: none;
+   border-bottom: 2px solid transparent;
+}
+
+.admin-nav-item.active {
+   color: #4f6d43;
+   border-bottom-color: #4f6d43;
+   font-weight: 600;
+}
+
+
+/* -------------- */
+
+.admin-toolbar {
+   display: flex;
+   justify-content: flex-end;
+   margin-bottom: 16px;
+}
+
+.admin-toolbar .btn-primary {
+   display: inline-block;
+   text-decoration: none;
+}
+
+.admin-product-img {
+   width: 48px;
+   height: 48px;
+   object-fit: cover;
+   border-radius: 8px;
+}
+
+.admin-actions-cell {
+   display: flex;
+   gap: 8px;
+}
+
+.admin-edit-btn {
+   color: #4f6d43;
+   text-decoration: none;
+   font-size: 13px;
+   padding: 6px 12px;
+   border: 1px solid #4f6d43;
+   border-radius: 8px;
+}
+
+.admin-delete-btn {
+   color: #d33;
+   background: none;
+   border: 1px solid #d33;
+   border-radius: 8px;
+   font-size: 13px;
+   padding: 6px 12px;
+   font-family: inherit;
+   cursor: pointer;
+}
+
+/* -------------- */
+
+
+.admin-form-box {
+   max-width: 500px;
+}
+
+.admin-form-box select,
+.admin-form-box textarea {
+   width: 100%;
+   padding: 10px 14px;
+   border: 1px solid #ddd;
+   border-radius: 10px;
+   font-size: 14px;
+   font-family: inherit;
+}
+
+.admin-form-box button,
+.admin-form-box a.btn-outline {
+   margin-left: 10px;
+}
+
+.admin-current-img {
+   width: 80px;
+   height: 80px;
+   object-fit: cover;
+   border-radius: 10px;
+   margin-bottom: 6px;
+   display: block;
+}
+
+.admin-img-hint {
+   font-size: 12px;
+   color: #999;
+   margin-bottom: 8px;
+}

@@ -69,7 +69,7 @@
 
                <!-- اگر نقش کاربر برابر بود با ادمین -->
                <?php if ($_SESSION["user_role"] === "admin"): ?>
-                  <a href="<?php echo $baseUrl; ?>php/admin/index.php" class="UserMenuItem AdminItem"> پنل مدیریت </a>
+                   <a href="<?php echo $baseUrl; ?>php/admin/index.php" class="UserMenuItem AdminItem"> پنل مدیریت </a>
                <?php endif; ?>
 
                <!-- دکمه خروج از حساب -->
