@@ -128,7 +128,6 @@ $stmt->close();
          </div>
 
          <div class="receipt-actions">
-            <button onclick="window.print()" class="btn-outline">چاپ رسید</button>
             <a href="/shop/frontend/index.php" class="btn-primary">بازگشت به فروشگاه</a>
          </div>
 
