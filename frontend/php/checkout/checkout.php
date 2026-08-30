@@ -4,8 +4,8 @@ session_start();
 
 // اگر کاربر لاگین نکرده بود، بفرستش صفحه ورود
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ' . $baseUrl . 'php/auth/login.php');
-    exit;
+   header('Location: ' . $baseUrl . 'php/auth/login.php');
+   exit;
 }
 ?>
 
@@ -41,6 +41,8 @@ if (!isset($_SESSION['user_id'])) {
          <div class="checkout-form-box">
 
             <h2>اطلاعات خریدار</h2>
+
+            <!-- این دو تا فیلد فقط نمایشی هستن، از سشن کاربر پر میشن و قابل ویرایش نیستن -->
             <div class="checkout-field">
                <label>نام</label>
                <input type="text" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" disabled>
@@ -51,6 +53,8 @@ if (!isset($_SESSION['user_id'])) {
             </div>
 
             <h2>اطلاعات کارت (نمایشی)</h2>
+
+            <!-- این فرم فقط شبیه‌سازیه، اطلاعات کارت واقعی به هیچ بانکی ارسال نمیشه -->
             <form id="payment-form">
                <div class="checkout-field">
                   <label>شماره کارت</label>
@@ -68,12 +72,12 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                </div>
 
-               <button type="submit" id="pay-btn" class="btn-primary"> پرداخت </button>
+               <button type="submit" id="pay-btn" class="btn-primary">پرداخت</button>
             </form>
 
          </div>
 
-         <!-- خلاصه سفارش -->
+         <!-- خلاصه سفارش - محتواش با جاوااسکریپت پر میشه -->
          <aside id="cart-summary" class="cart-summary">
             <h2>خلاصه سفارش</h2>
             <div id="checkout-items"></div>
@@ -87,7 +91,7 @@ if (!isset($_SESSION['user_id'])) {
 
    </main>
 
-   <!-- لودینگ پرداخت -->
+   <!-- حالت لودینگ، وقتی کاربر دکمه پرداخت رو میزنه نشون داده میشه -->
    <div id="payment-loading" class="payment-loading" style="display:none;">
       <div class="spinner"></div>
       <span>در حال اتصال به بانک...</span>

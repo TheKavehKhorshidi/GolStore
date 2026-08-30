@@ -2,13 +2,18 @@
 require '../../partials/config.php';
 session_start();
 
+// فقط ادمین اجازه ورود داره
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    header('Location: ' . $baseUrl . 'index.php');
-    exit;
+   header('Location: ' . $baseUrl . 'index.php');
+   exit;
 }
 
 require_once __DIR__ . '/../../../backend/db.php';
 
+
+// _______________________________ خوندن محصولات از دیتابیس _______________________________
+
+// خوندن همه محصولات، جدیدترین اول
 $result = $conn->query("SELECT * FROM products ORDER BY id DESC");
 $products = $result->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -38,6 +43,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
          <p class="cart-subtitle">مدیریت محصولات</p>
       </div>
 
+      <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
          <a href="index.php" class="admin-nav-item">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item active">محصولات</a>
@@ -47,6 +53,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
          <a href="product_form.php" class="btn-primary">+ افزودن محصول جدید</a>
       </div>
 
+      <!-- جدول محصولات -->
       <div class="admin-table-wrapper">
          <table class="admin-table">
             <thead>
@@ -71,7 +78,10 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?php echo htmlspecialchars($product['category']); ?></td>
                         <td><?php echo number_format($product['price']); ?> تومان</td>
                         <td class="admin-actions-cell">
+                           <!-- دکمه ویرایش، همون فرم محصول رو با id این محصول باز می‌کنه -->
                            <a href="product_form.php?id=<?php echo $product['id']; ?>" class="admin-edit-btn">ویرایش</a>
+
+                           <!-- دکمه حذف، با جاوااسکریپت (products.js) درخواست حذف رو می‌فرسته -->
                            <button class="admin-delete-btn" data-id="<?php echo $product['id']; ?>">حذف</button>
                         </td>
                      </tr>

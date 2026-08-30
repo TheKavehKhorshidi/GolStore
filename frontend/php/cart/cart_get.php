@@ -1,59 +1,79 @@
 <?php
 // frontend/php/cart/cart_get.php
-// ورودی: JSON شامل آرایه‌ای از id محصولات → { "ids": [1, 2, 3] }
-// خروجی: اطلاعات کامل و به‌روز هر محصول (برای نمایش در صفحه سبد خرید)
+//
+// این فایل اطلاعات کامل محصولات داخل سبد خرید رو برمیگردونه
+// ورودی: { "ids": [1, 2, 3] }
+// خروجی: لیست محصولات با اسم، قیمت، عکس و ...
 
 header('Content-Type: application/json; charset=utf-8');
 
-// مسیر db.php رو با توجه به محل واقعی فایل در پروژه‌تون تنظیم کنید
 require_once __DIR__ . '/../../../backend/db.php';
 
-// فقط متد POST مجاز است
+
+// _______________________________ بررسی متد درخواست _______________________________
+
+// این api فقط با متد POST کار می‌کنه
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'متد غیرمجاز']);
-    exit;
+   http_response_code(405);
+   echo json_encode(['success' => false, 'message' => 'متد غیرمجاز']);
+   exit;
 }
 
+
+// _______________________________ خوندن و پاکسازی ورودی _______________________________
+
+// خوندن دیتای ارسالی و گرفتن آرایه ایدی‌ها
 $input = json_decode(file_get_contents('php://input'), true);
 $ids = $input['ids'] ?? [];
 
-// اعتبارسنجی: باید آرایه غیرخالی باشه
+// اگه آرایه نبود یا خالی بود، یه لیست خالی برگردون
 if (!is_array($ids) || count($ids) === 0) {
-    echo json_encode(['success' => true, 'products' => []]);
-    exit;
+   echo json_encode(['success' => true, 'products' => []]);
+   exit;
 }
 
-// فقط عدد صحیح مثبت قبول می‌کنیم (جلوگیری از ورودی مخرب)
-$ids = array_filter($ids, fn($id) => is_numeric($id) && $id > 0);
-$ids = array_map('intval', $ids);
-
-if (count($ids) === 0) {
-    echo json_encode(['success' => true, 'products' => []]);
-    exit;
+// فقط عددهای صحیح و مثبت رو نگه می‌داریم (برای امنیت بیشتر)
+$cleanIds = [];
+foreach ($ids as $id) {
+   if (is_numeric($id) && $id > 0) {
+      $cleanIds[] = (int) $id;
+   }
 }
 
-// ساخت placeholder های امن برای IN (...) با mysqli prepared statement
-$placeholders = implode(',', array_fill(0, count($ids), '?'));
-$types = str_repeat('i', count($ids)); // همه ورودی‌ها عدد صحیح (integer) هستند
+// اگه بعد از پاکسازی چیزی نموند، لیست خالی برگردون
+if (count($cleanIds) === 0) {
+   echo json_encode(['success' => true, 'products' => []]);
+   exit;
+}
+
+
+// _______________________________ گرفتن محصولات از دیتابیس _______________________________
+
+// چون تعداد ایدی‌ها متغیره، به همون تعداد "?" برای کوئری میسازیم
+$placeholders = implode(',', array_fill(0, count($cleanIds), '?'));
+
+// چون همه ورودی‌ها عدد صحیح هستن، تایپشون برای همه "i" میشه
+$types = str_repeat('i', count($cleanIds));
 
 $sql = "SELECT id, name, price, image, category, description FROM products WHERE id IN ($placeholders)";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'خطا در آماده‌سازی کوئری']);
-    exit;
+   http_response_code(500);
+   echo json_encode(['success' => false, 'message' => 'خطا در آماده‌سازی کوئری']);
+   exit;
 }
 
-// bind_param به‌صورت داینامیک (چون تعداد id ها متغیره)
-$stmt->bind_param($types, ...$ids);
+// دادن ایدی‌ها به کوئری (به‌صورت داینامیک، چون تعدادشون متغیره)
+$stmt->bind_param($types, ...$cleanIds);
 $stmt->execute();
 
 $result = $stmt->get_result();
+
+// جمع کردن نتیجه‌ها تو یه آرایه ساده
 $products = [];
 while ($row = $result->fetch_assoc()) {
-    $products[] = $row;
+   $products[] = $row;
 }
 
 $stmt->close();

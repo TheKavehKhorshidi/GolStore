@@ -1,11 +1,15 @@
 <?php
 // frontend/php/checkout/checkout_process.php
-// ثبت سفارش نهایی در دیتابیس بعد از پرداخت (شبیه‌سازی‌شده)
+//
+// این فایل سفارش نهایی رو بعد از پرداخت (شبیه‌سازی‌شده) تو دیتابیس ثبت می‌کنه
 
 header('Content-Type: application/json; charset=utf-8');
 session_start();
 
 require_once __DIR__ . '/../../../backend/db.php';
+
+
+// _______________________________ بررسی متد و لاگین بودن کاربر _______________________________
 
 // فقط متد POST مجاز است
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -14,12 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
    exit;
 }
 
-// کاربر باید لاگین کرده باشه
+// کاربر باید لاگین کرده باشه تا بتونه سفارش ثبت کنه
 if (!isset($_SESSION['user_id'])) {
    http_response_code(401);
    echo json_encode(['success' => false, 'message' => 'ابتدا وارد حساب کاربری خود شوید']);
    exit;
 }
+
+
+// _______________________________ خوندن سبد خرید ارسالی از کاربر _______________________________
 
 $input = json_decode(file_get_contents('php://input'), true);
 $cart = $input['cart'] ?? [];
@@ -29,16 +36,26 @@ if (!is_array($cart) || count($cart) === 0) {
    exit;
 }
 
-// استخراج id ها برای خوندن قیمت واقعی از دیتابیس
-$ids = array_filter(array_column($cart, 'id'), fn($id) => is_numeric($id) && $id > 0);
-$ids = array_map('intval', $ids);
+// از بین آیتم‌های سبد، فقط ایدی‌های عددی و معتبر رو جدا می‌کنیم
+$ids = [];
+foreach ($cart as $cartItem) {
+   $id = $cartItem['id'] ?? null;
+
+   if (is_numeric($id) && $id > 0) {
+      $ids[] = (int) $id;
+   }
+}
 
 if (count($ids) === 0) {
    echo json_encode(['success' => false, 'message' => 'سبد خرید نامعتبر است']);
    exit;
 }
 
-// خوندن محصولات واقعی از دیتابیس (نه از سمت کاربر)
+
+// _______________________________ خوندن قیمت واقعی محصولات از دیتابیس _______________________________
+
+// نکته مهم: قیمت رو از دیتابیس می‌خونیم نه از دیتای ارسالی کاربر
+// چون کاربر می‌تونه قیمت ارسالی رو از سمت مرورگر دستکاری کنه
 $placeholders = implode(',', array_fill(0, count($ids), '?'));
 $types = str_repeat('i', count($ids));
 
@@ -47,22 +64,27 @@ $stmt->bind_param($types, ...$ids);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// محصولات رو بر اساس id تو یه آرایه ذخیره می‌کنیم تا راحت پیداشون کنیم
 $dbProducts = [];
 while ($row = $result->fetch_assoc()) {
    $dbProducts[$row['id']] = $row;
 }
 $stmt->close();
 
-// ترکیب تعداد (از سبد کاربر) با قیمت واقعی (از دیتابیس)
+
+// _______________________________ ساخت لیست نهایی سفارش _______________________________
+
+// تعداد هر محصول رو از سبد کاربر می‌گیریم، ولی قیمتش رو از دیتابیس
 $orderItems = [];
 $totalPrice = 0;
 
 foreach ($cart as $cartItem) {
-   $id = intval($cartItem['id'] ?? 0);
-   $quantity = intval($cartItem['quantity'] ?? 0);
+   $id = (int) ($cartItem['id'] ?? 0);
+   $quantity = (int) ($cartItem['quantity'] ?? 0);
 
+   // اگه محصول تو دیتابیس پیدا نشد یا تعدادش نامعتبر بود، ردش کن
    if (!isset($dbProducts[$id]) || $quantity <= 0) {
-      continue; // محصول نامعتبر یا حذف‌شده رو نادیده بگیر
+      continue;
    }
 
    $product = $dbProducts[$id];
@@ -82,28 +104,38 @@ if (count($orderItems) === 0) {
    exit;
 }
 
-// ساخت شماره پیگیری یکتا (مثلاً ORD-7F3K92A1)
+
+// _______________________________ ساخت شماره پیگیری یکتا _______________________________
+
+// یه شماره پیگیری تصادفی می‌سازه، مثلاً ORD-7F3K92A1
+// و اگه تصادفاً تکراری بود، دوباره میسازه تا مطمئن بشه یکتاست
 function generateOrderNumber($conn)
 {
    do {
       $orderNumber = 'ORD-' . strtoupper(substr(bin2hex(random_bytes(5)), 0, 8));
+
       $check = $conn->prepare("SELECT id FROM orders WHERE order_number = ?");
       $check->bind_param('s', $orderNumber);
       $check->execute();
       $exists = $check->get_result()->num_rows > 0;
       $check->close();
-   } while ($exists); // اگر تصادفاً تکراری بود، دوباره بساز
+
+   } while ($exists);
 
    return $orderNumber;
 }
 
 $orderNumber = generateOrderNumber($conn);
 
-// ثبت سفارش با تراکنش (transaction) تا اگر جایی خطا شد، هیچی نصفه‌کاره ذخیره نشه
+
+// _______________________________ ثبت نهایی سفارش در دیتابیس _______________________________
+
+// از transaction استفاده می‌کنیم تا اگه یه جای کار خطا داد،
+// نصفه‌کاره چیزی تو دیتابیس ذخیره نشه (یا همه ثبت میشه، یا هیچی)
 $conn->begin_transaction();
 
 try {
-   // ثبت خود سفارش
+   // اول خود سفارش رو ثبت می‌کنیم
    $stmt = $conn->prepare(
       "INSERT INTO orders (order_number, user_id, customer_name, customer_email, total_price, status)
       VALUES (?, ?, ?, ?, ?, 'processing')"
@@ -120,10 +152,10 @@ try {
    $orderId = $stmt->insert_id;
    $stmt->close();
 
-   // ثبت آیتم‌های سفارش
+   // بعد، هر محصول داخل سفارش رو جدا ثبت می‌کنیم
    $itemStmt = $conn->prepare(
       "INSERT INTO order_items (order_id, product_id, product_name, price, quantity)
-         VALUES (?, ?, ?, ?, ?)"
+      VALUES (?, ?, ?, ?, ?)"
    );
 
    foreach ($orderItems as $item) {
@@ -139,11 +171,13 @@ try {
    }
    $itemStmt->close();
 
+   // همه چیز درست پیش رفت، پس تغییرات رو نهایی می‌کنیم
    $conn->commit();
 
    echo json_encode(['success' => true, 'order_number' => $orderNumber]);
 
 } catch (Exception $e) {
+   // اگه یه جایی خطا داد، همه چیز رو برمی‌گردونیم به حالت قبل
    $conn->rollback();
    http_response_code(500);
    echo json_encode(['success' => false, 'message' => 'خطا در ثبت سفارش']);

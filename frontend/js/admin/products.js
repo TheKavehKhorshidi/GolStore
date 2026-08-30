@@ -1,9 +1,12 @@
-// ___________________________________ حذف محصول ___________________________________
+// _______________________________ حذف محصول _______________________________
+
 document.querySelectorAll('.admin-delete-btn').forEach(button => {
    button.addEventListener('click', async () => {
       const productId = button.dataset.id;
 
+      // اول از ادمین تایید می‌گیریم که واقعا می‌خواد حذف کنه
       const confirmDelete = confirm('مطمئنی می‌خوای این محصول رو حذف کنی؟');
+
       if (!confirmDelete) {
          return;
       }
@@ -33,4 +36,3 @@ document.querySelectorAll('.admin-delete-btn').forEach(button => {
       }
    });
 });
-// ___________________________________________________________________________________________________________________

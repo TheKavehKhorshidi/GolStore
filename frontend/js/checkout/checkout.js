@@ -1,8 +1,12 @@
-let currentProducts = []; // محصولات سبد خرید که از سرور گرفته می‌شن، برای استفاده در submit
+// محصولات سبد خرید که از سرور گرفته می‌شن (فعلاً فقط برای نمایش خلاصه استفاده میشه)
+let currentProducts = [];
 
-// ___________________________________ نمایش خلاصه سفارش ___________________________________
+
+// _______________________________ نمایش خلاصه سفارش _______________________________
+
+// نمایش لیست محصولات و جمع کل قیمت، بالای فرم پرداخت
 async function renderCheckoutSummary() {
-   const itemsEl = document.getElementById('checkout-items');
+   const itemsContainer = document.getElementById('checkout-items');
    const products = await fetchCartProductsInfo();
 
    // اگر سبد خرید خالی بود، برگرد به صفحه سبد خرید
@@ -14,12 +18,14 @@ async function renderCheckoutSummary() {
    currentProducts = products;
 
    let total = 0;
+   let itemsHtml = '';
 
-   itemsEl.innerHTML = products.map(product => {
+   // برای هر محصول، یه بلوک HTML میسازیم و به جمع کل هم اضافه می‌کنیم
+   for (const product of products) {
       const lineTotal = product.price * product.quantity;
       total += lineTotal;
 
-      return `
+      itemsHtml += `
          <div class="checkout-summary-item">
             <div>
                <div class="item-name">${product.name}</div>
@@ -28,56 +34,55 @@ async function renderCheckoutSummary() {
             <div class="item-price">${lineTotal.toLocaleString('fa-IR')} تومان</div>
          </div>
       `;
-   }).join('');
+   }
 
-   document.getElementById('cart-total-price').textContent =
-      total.toLocaleString('fa-IR') + ' تومان';
+   itemsContainer.innerHTML = itemsHtml;
+   document.getElementById('cart-total-price').textContent = total.toLocaleString('fa-IR') + ' تومان';
 }
-// ___________________________________________________________________________________________________________________
 
 
+// _______________________________ فرمت خودکار فیلدهای کارت (فقط ظاهری) _______________________________
 
-
-// ___________________________________ فرمت خودکار فیلدهای کارت (فقط ظاهری) ___________________________________
 const cardNumberInput = document.getElementById('card-number');
 const cardExpiryInput = document.getElementById('card-expiry');
 const cardCvvInput = document.getElementById('card-cvv');
 
-// اجازه فقط عدد و گذاشتن خط‌تیره هر ۴ رقم
+// شماره کارت: فقط عدد، و گذاشتن خط‌تیره هر ۴ رقم
 cardNumberInput.addEventListener('input', () => {
    let value = cardNumberInput.value.replace(/\D/g, '').slice(0, 16);
    cardNumberInput.value = value.replace(/(.{4})/g, '$1-').replace(/-$/, '');
 });
 
-// فرمت MM/YY
+// تاریخ انقضا: فرمت MM/YY
 cardExpiryInput.addEventListener('input', () => {
    let value = cardExpiryInput.value.replace(/\D/g, '').slice(0, 4);
+
    if (value.length > 2) {
       value = value.slice(0, 2) + '/' + value.slice(2);
    }
+
    cardExpiryInput.value = value;
 });
 
-// فقط عدد برای CVV2
+// CVV2: فقط عدد
 cardCvvInput.addEventListener('input', () => {
    cardCvvInput.value = cardCvvInput.value.replace(/\D/g, '').slice(0, 4);
 });
-// ___________________________________________________________________________________________________________________
 
 
+// _______________________________ ارسال پرداخت _______________________________
 
-
-// ___________________________________ ارسال پرداخت ___________________________________
 document.getElementById('payment-form').addEventListener('submit', async (e) => {
    e.preventDefault();
 
    const payBtn = document.getElementById('pay-btn');
    const loadingEl = document.getElementById('payment-loading');
 
+   // دکمه رو غیرفعال می‌کنیم و لودینگ رو نشون می‌دیم تا کاربر دوباره کلیک نکنه
    payBtn.disabled = true;
    loadingEl.style.display = 'flex';
 
-   // تاخیر مصنوعی برای شبیه‌سازی اتصال به بانک
+   // یه تاخیر مصنوعی ۲ ثانیه‌ای، فقط برای شبیه‌سازی اتصال به بانک
    await new Promise(resolve => setTimeout(resolve, 2000));
 
    try {
@@ -96,10 +101,10 @@ document.getElementById('payment-form').addEventListener('submit', async (e) => 
          return;
       }
 
-      // سبد خرید رو خالی کن چون سفارش ثبت شد
+      // پرداخت موفق بود، پس سبد خرید رو خالی می‌کنیم
       clearCart();
 
-      // برو به صفحه رسید با شماره سفارش
+      // و کاربر رو به صفحه رسید، همراه با شماره سفارش، هدایت می‌کنیم
       window.location.href = '/shop/frontend/php/checkout/receipt.php?order=' + data.order_number;
 
    } catch (err) {
@@ -108,10 +113,7 @@ document.getElementById('payment-form').addEventListener('submit', async (e) => 
       loadingEl.style.display = 'none';
    }
 });
-// ___________________________________________________________________________________________________________________
 
 
-
-
-// نمایش اولیه خلاصه سفارش
+// نمایش اولیه خلاصه سفارش، به محض لود شدن اسکریپت
 renderCheckoutSummary();

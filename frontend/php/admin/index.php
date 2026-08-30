@@ -2,24 +2,30 @@
 require '../../partials/config.php';
 session_start();
 
+require_once __DIR__ . '/../../../backend/db.php';
+
+
+// _______________________________ بررسی دسترسی ادمین _______________________________
+
 // فقط ادمین اجازه ورود داره
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    header('Location: ' . $baseUrl . 'index.php');
-    exit;
+   header('Location: ' . $baseUrl . 'index.php');
+   exit;
 }
 
-require_once __DIR__ . '/../../../backend/db.php';
+
+// _______________________________ خوندن سفارش‌ها از دیتابیس _______________________________
 
 // خوندن همه سفارش‌ها، جدیدترین اول
 $result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
 $orders = $result->fetch_all(MYSQLI_ASSOC);
 
-// متن فارسی هر وضعیت (برای نمایش)
+// متن فارسی هر وضعیت، برای نمایش تو صفحه
 $statusLabels = [
-    'processing' => 'در حال پردازش',
-    'shipped' => 'ارسال شده',
-    'delivered' => 'تحویل داده شده',
-    'cancelled' => 'لغو شده',
+   'processing' => 'در حال پردازش',
+   'shipped' => 'ارسال شده',
+   'delivered' => 'تحویل داده شده',
+   'cancelled' => 'لغو شده',
 ];
 ?>
 
@@ -48,12 +54,13 @@ $statusLabels = [
          <p class="cart-subtitle">مدیریت سفارش‌ها</p>
       </div>
 
+      <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
          <a href="index.php" class="admin-nav-item active">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item">محصولات</a>
       </div>
 
-      <!-- جستجو -->
+      <!-- جستجو - فیلتر کردن جدول با جاوااسکریپت انجام میشه -->
       <div class="admin-search-box">
          <input type="text" id="order-search" placeholder="جستجو بر اساس شماره سفارش، نام یا ایمیل خریدار...">
       </div>
@@ -78,13 +85,18 @@ $statusLabels = [
                   </tr>
                <?php else: ?>
                   <?php foreach ($orders as $order): ?>
-                     <tr data-search-text="<?php echo htmlspecialchars(strtolower($order['order_number'] . ' ' . $order['customer_name'] . ' ' . $order['customer_email'])); ?>">
+                     <?php
+                        // یه متن ساده از اطلاعات سفارش می‌سازیم تا جستجوی سمت جاوااسکریپت روش کار کنه
+                        $searchText = strtolower($order['order_number'] . ' ' . $order['customer_name'] . ' ' . $order['customer_email']);
+                     ?>
+                     <tr data-search-text="<?php echo htmlspecialchars($searchText); ?>">
                         <td><?php echo htmlspecialchars($order['order_number']); ?></td>
                         <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
                         <td><?php echo htmlspecialchars($order['customer_email']); ?></td>
                         <td><?php echo number_format($order['total_price']); ?> تومان</td>
                         <td><?php echo date('Y/m/d - H:i', strtotime($order['created_at'])); ?></td>
                         <td>
+                           <!-- تغییر وضعیت سفارش از همینجا، با جاوااسکریپت به سرور ارسال میشه -->
                            <select class="status-select" data-order-id="<?php echo $order['id']; ?>">
                               <?php foreach ($statusLabels as $value => $label): ?>
                                  <option value="<?php echo $value; ?>" <?php echo $order['status'] === $value ? 'selected' : ''; ?>>
