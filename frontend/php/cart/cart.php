@@ -61,7 +61,7 @@ require '../../partials/config.php';
                <span>جمع کل</span>
                <strong id="cart-total-price">۰ تومان</strong>
             </div>
-            <a href="checkout.php" class="btn-primary"> ادامه فرآیند خرید </a>
+            <a class="btn-primary" href="/shop/frontend/php/checkout/checkout.php"> ادامه فرآیند خرید </a>
          </aside>
 
       </div>
