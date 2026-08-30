@@ -1,13 +1,11 @@
-<!-- اتصال به دیتابیس و دریافت محصولات -->
-
 <?php
-require '../backend/db.php'; // اتصال به دیتا بیس
-require 'partials/config.php'; // مسیر /shop/frontend/
+require '../backend/db.php'; // اتصال به دیتابیس
+require 'partials/config.php'; // مسیر پایه سایت (/shop/frontend/)
 
-$result = $conn->query("SELECT * FROM products"); // دریافت محصولات 
+// فقط ۴ محصول آخر رو می‌گیریم تا تو صفحه اصلی نمایش بدیم
+// (این بخش فقط نمایشیه، فروش واقعی هیچ محصولی رو حساب نمی‌کنه)
+$result = $conn->query("SELECT * FROM products ORDER BY id DESC LIMIT 4");
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -15,27 +13,24 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
 <head>
    <meta charset="UTF-8">
    <title>GolStore</title>
-   <link rel="stylesheet" href="css/style.css"> <!-- style -->
-   
-   <link rel="stylesheet" href="css/header/header.css"> <!-- header -->
-   <link rel="stylesheet" href="css/footer/footer.css"> <!-- footer -->
 
-   <link rel="stylesheet" href="css/home/home.css"> <!-- home -->
-   <link rel="stylesheet" href="css/slider/slider.css"> <!-- slider -->
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/header/header.css">
+   <link rel="stylesheet" href="css/footer/footer.css">
+   <link rel="stylesheet" href="css/home/home.css">
+   <link rel="stylesheet" href="css/slider/slider.css">
 </head>
 
 <body>
 
-   <!-- header -->
-   <!--  نمایش هدر سایت -->
+   <!-- نمایش هدر سایت -->
    <?php include 'partials/header/header.php'; ?>
 
-   <!-- main -->
    <main>
 
       <div class="container">
 
-         <!-- slider -->
+         <!-- اسلایدر بالای صفحه -->
          <div class="slider-wrapper">
 
             <button id="nextBtn" class="slider-btn">‹</button>
@@ -73,7 +68,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
          </div>
 
 
-         <!-- Categories -->
+         <!-- دسته‌بندی‌ها -->
          <h3 class="section-title">دسته بندی ها</h3>
          <div class="CategoriesContainer">
 
@@ -100,28 +95,24 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
          </div>
 
 
-         <!-- Best-selling -->
+         <!-- محصولات پرفروش (نمایشی) -->
          <div class="ProductsContainer">
 
             <h3 class="section-title">محصولات پر فروش</h3>
 
             <div class="ProductsGrid">
-               <!-- حلقه -->
-               <?php while ($product = $result->fetch_assoc()): ?> 
+               <?php while ($product = $result->fetch_assoc()): ?>
 
                   <div class="ProductCard">
-                     <!-- image -->
                      <img
                         class="ProductImg"
-                        src="<?php echo htmlspecialchars($product['image']); ?>" 
+                        src="<?php echo htmlspecialchars($product['image']); ?>"
                         alt="<?php echo htmlspecialchars($product['name']); ?>">
-                        
-                     <!-- name -->
+
                      <p class="ProductName">
                         <?php echo htmlspecialchars($product['name']); ?>
                      </p>
 
-                     <!-- product -->
                      <p class="ProductPrice">
                         <?php echo number_format($product['price']); ?> تومان
                      </p>
@@ -141,7 +132,7 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
       </div>
 
 
-      <!-- Why section -->
+      <!-- بخش دلایل انتخاب فروشگاه -->
       <div class="WhyContainer">
 
          <div class="WhyTitle">
@@ -198,11 +189,10 @@ $result = $conn->query("SELECT * FROM products"); // دریافت محصولات
 
    </main>
 
-   <!-- footer -->
-   <?php include 'partials/footer/footer.php'; ?> <!--  نمایش فوتر سایت -->
-   
-   
-   <script src="js/slider/slider.js"></script> <!-- کد های جاوااسکریپت اسلایدر -->
+   <!-- نمایش فوتر سایت -->
+   <?php include 'partials/footer/footer.php'; ?>
+
+   <script src="js/slider/slider.js"></script>
 
 </body>
 
