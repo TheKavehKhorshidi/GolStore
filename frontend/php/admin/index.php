@@ -54,6 +54,7 @@ $statusLabels = [
       <div class="admin-nav">
          <a href="index.php" class="admin-nav-item active">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item">محصولات</a>
+            <a href="users.php" class="admin-nav-item">کاربران</a>
       </div>
 
       <div class="admin-search-box">
