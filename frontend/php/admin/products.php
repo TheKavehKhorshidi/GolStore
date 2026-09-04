@@ -42,11 +42,12 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
          <h1 class="section-title">پنل مدیریت</h1>
          <p class="cart-subtitle">مدیریت محصولات</p>
       </div>
-
+      
       <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
          <a href="index.php" class="admin-nav-item">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item active">محصولات</a>
+         <a href="users.php" class="admin-nav-item">کاربران</a>
       </div>
 
       <div class="admin-toolbar">
