@@ -24,13 +24,25 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 
-// _______________________________ خوندن سبد خرید ارسالی از کاربر _______________________________
+// _______________________________ خوندن سبد خرید و اطلاعات خریدار ارسالی از کاربر _______________________________
 
 $input = json_decode(file_get_contents('php://input'), true);
 $cart = $input['cart'] ?? [];
+$buyer = $input['buyer'] ?? [];
 
 if (!is_array($cart) || count($cart) === 0) {
    echo json_encode(['success' => false, 'message' => 'سبد خرید خالی است']);
+   exit;
+}
+
+// اطلاعات خریدار رو می‌خونیم، فیلدهای اجباری رو چک می‌کنیم
+$customerAddress = trim($buyer['address'] ?? '');
+$customerPhone = trim($buyer['phone'] ?? '');
+$deliveryTime = trim($buyer['delivery_time'] ?? '');
+$notes = trim($buyer['notes'] ?? '');
+
+if ($customerAddress === '' || $customerPhone === '') {
+   echo json_encode(['success' => false, 'message' => 'اطلاعات آدرس و تلفن الزامی است']);
    exit;
 }
 
@@ -109,17 +121,22 @@ $orderNumber = 'ORD-' . strtoupper(substr(bin2hex(random_bytes(5)), 0, 8));
 
 // _______________________________ ثبت سفارش در دیتابیس _______________________________
 
-// ثبت خود سفارش
+// ثبت خود سفارش، همراه با آدرس، تلفن، زمان تحویل و توضیحات
 $stmt = $conn->prepare(
-   "INSERT INTO orders (order_number, user_id, customer_name, customer_email, total_price, status)
-   VALUES (?, ?, ?, ?, ?, 'processing')"
+   "INSERT INTO orders
+   (order_number, user_id, customer_name, customer_email, customer_address, customer_phone, delivery_time, notes, total_price, status)
+   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'processing')"
 );
 $stmt->bind_param(
-   'sissi',
+   'sissssssi',
    $orderNumber,
    $_SESSION['user_id'],
    $_SESSION['user_name'],
    $_SESSION['user_email'],
+   $customerAddress,
+   $customerPhone,
+   $deliveryTime,
+   $notes,
    $totalPrice
 );
 $stmt->execute();

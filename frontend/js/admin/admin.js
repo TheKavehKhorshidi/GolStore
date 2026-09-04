@@ -55,3 +55,14 @@ document.querySelectorAll('.status-select').forEach(select => {
       }
    });
 });
+
+
+
+document.querySelectorAll('.order-toggle-btn').forEach(btn => {
+   btn.addEventListener('click', () => {
+      const targetRow = document.getElementById(btn.dataset.target);
+      const isHidden = targetRow.style.display === 'none';
+      targetRow.style.display = isHidden ? 'table-row' : 'none';
+      btn.textContent = isHidden ? '▴' : '▾';
+   });
+});

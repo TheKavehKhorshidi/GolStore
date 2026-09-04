@@ -7,7 +7,6 @@ require_once __DIR__ . '/../../../backend/db.php';
 
 // _______________________________ بررسی دسترسی ادمین _______________________________
 
-// فقط ادمین اجازه ورود داره
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
    header('Location: ' . $baseUrl . 'index.php');
    exit;
@@ -16,11 +15,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
 
 // _______________________________ خوندن سفارش‌ها از دیتابیس _______________________________
 
-// خوندن همه سفارش‌ها، جدیدترین اول
 $result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
 $orders = $result->fetch_all(MYSQLI_ASSOC);
 
-// متن فارسی هر وضعیت، برای نمایش تو صفحه
 $statusLabels = [
    'processing' => 'در حال پردازش',
    'shipped' => 'ارسال شده',
@@ -54,22 +51,20 @@ $statusLabels = [
          <p class="cart-subtitle">مدیریت سفارش‌ها</p>
       </div>
 
-      <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
          <a href="index.php" class="admin-nav-item active">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item">محصولات</a>
       </div>
 
-      <!-- جستجو - فیلتر کردن جدول با جاوااسکریپت انجام میشه -->
       <div class="admin-search-box">
          <input type="text" id="order-search" placeholder="جستجو بر اساس شماره سفارش، نام یا ایمیل خریدار...">
       </div>
 
-      <!-- جدول سفارش‌ها -->
       <div class="admin-table-wrapper">
          <table class="admin-table">
             <thead>
                <tr>
+                  <th></th>
                   <th>شماره پیگیری</th>
                   <th>خریدار</th>
                   <th>ایمیل</th>
@@ -81,22 +76,25 @@ $statusLabels = [
             <tbody id="orders-table-body">
                <?php if (count($orders) === 0): ?>
                   <tr>
-                     <td colspan="6" class="admin-empty-row">هنوز سفارشی ثبت نشده</td>
+                     <td colspan="7" class="admin-empty-row">هنوز سفارشی ثبت نشده</td>
                   </tr>
                <?php else: ?>
                   <?php foreach ($orders as $order): ?>
                      <?php
-                        // یه متن ساده از اطلاعات سفارش می‌سازیم تا جستجوی سمت جاوااسکریپت روش کار کنه
                         $searchText = strtolower($order['order_number'] . ' ' . $order['customer_name'] . ' ' . $order['customer_email']);
                      ?>
+
+                     <!-- ردیف اصلی سفارش -->
                      <tr data-search-text="<?php echo htmlspecialchars($searchText); ?>">
+                        <td>
+                           <button type="button" class="order-toggle-btn" data-target="details-<?php echo $order['id']; ?>">▾</button>
+                        </td>
                         <td><?php echo htmlspecialchars($order['order_number']); ?></td>
                         <td><?php echo htmlspecialchars($order['customer_name']); ?></td>
                         <td><?php echo htmlspecialchars($order['customer_email']); ?></td>
                         <td><?php echo number_format($order['total_price']); ?> تومان</td>
                         <td><?php echo date('Y/m/d - H:i', strtotime($order['created_at'])); ?></td>
                         <td>
-                           <!-- تغییر وضعیت سفارش از همینجا، با جاوااسکریپت به سرور ارسال میشه -->
                            <select class="status-select" data-order-id="<?php echo $order['id']; ?>">
                               <?php foreach ($statusLabels as $value => $label): ?>
                                  <option value="<?php echo $value; ?>" <?php echo $order['status'] === $value ? 'selected' : ''; ?>>
@@ -106,6 +104,19 @@ $statusLabels = [
                            </select>
                         </td>
                      </tr>
+
+                     <!-- ردیف جزئیات، اول مخفیه و با کلیک روی فلش باز میشه -->
+                     <tr id="details-<?php echo $order['id']; ?>" class="order-details-row" style="display:none;">
+                        <td colspan="7">
+                           <div class="order-details-box">
+                              <div><strong>آدرس:</strong> <?php echo htmlspecialchars($order['customer_address'] ?? '-'); ?></div>
+                              <div><strong>تلفن:</strong> <?php echo htmlspecialchars($order['customer_phone'] ?? '-'); ?></div>
+                              <div><strong>زمان تحویل درخواستی:</strong> <?php echo htmlspecialchars($order['delivery_time'] ?: '-'); ?></div>
+                              <div><strong>توضیحات:</strong> <?php echo htmlspecialchars($order['notes'] ?: '-'); ?></div>
+                           </div>
+                        </td>
+                     </tr>
+
                   <?php endforeach; ?>
                <?php endif; ?>
             </tbody>
