@@ -4,12 +4,10 @@ let currentProducts = [];
 
 // _______________________________ نمایش خلاصه سفارش _______________________________
 
-// نمایش لیست محصولات و جمع کل قیمت، بالای فرم پرداخت
 async function renderCheckoutSummary() {
    const itemsContainer = document.getElementById('checkout-items');
    const products = await fetchCartProductsInfo();
 
-   // اگر سبد خرید خالی بود، برگرد به صفحه سبد خرید
    if (products.length === 0) {
       window.location.href = '/shop/frontend/php/cart/cart.php';
       return;
@@ -20,7 +18,6 @@ async function renderCheckoutSummary() {
    let total = 0;
    let itemsHtml = '';
 
-   // برای هر محصول، یه بلوک HTML میسازیم و به جمع کل هم اضافه می‌کنیم
    for (const product of products) {
       const lineTotal = product.price * product.quantity;
       total += lineTotal;
@@ -47,73 +44,123 @@ const cardNumberInput = document.getElementById('card-number');
 const cardExpiryInput = document.getElementById('card-expiry');
 const cardCvvInput = document.getElementById('card-cvv');
 
-// شماره کارت: فقط عدد، و گذاشتن خط‌تیره هر ۴ رقم
 cardNumberInput.addEventListener('input', () => {
    let value = cardNumberInput.value.replace(/\D/g, '').slice(0, 16);
    cardNumberInput.value = value.replace(/(.{4})/g, '$1-').replace(/-$/, '');
 });
 
-// تاریخ انقضا: فرمت MM/YY
 cardExpiryInput.addEventListener('input', () => {
    let value = cardExpiryInput.value.replace(/\D/g, '').slice(0, 4);
-
    if (value.length > 2) {
       value = value.slice(0, 2) + '/' + value.slice(2);
    }
-
    cardExpiryInput.value = value;
 });
 
-// CVV2: فقط عدد
 cardCvvInput.addEventListener('input', () => {
    cardCvvInput.value = cardCvvInput.value.replace(/\D/g, '').slice(0, 4);
 });
 
 
-// _______________________________ ارسال پرداخت _______________________________
+// _______________________________ جمع‌آوری اطلاعات خریدار _______________________________
+
+function getBuyerInfo() {
+   return {
+      name: document.getElementById('buyer-name').value.trim(),
+      address: document.getElementById('buyer-address').value.trim(),
+      phone: document.getElementById('buyer-phone').value.trim(),
+      delivery_time: document.getElementById('delivery-time').value.trim(),
+      notes: document.getElementById('order-notes').value.trim()
+   };
+}
+
+// چک می‌کنه فیلدهای اجباری (نام، آدرس، تلفن) پر شده باشن
+function validateBuyerInfo(buyer) {
+   if (!buyer.name || !buyer.address || !buyer.phone) {
+      alert('لطفاً نام، آدرس و شماره تماس رو وارد کنید');
+      return false;
+   }
+   return true;
+}
+
+
+// _______________________________ مرحله ۱: زدن دکمه پرداخت → نمایش OTP _______________________________
 
 document.getElementById('payment-form').addEventListener('submit', async (e) => {
    e.preventDefault();
 
+   const buyer = getBuyerInfo();
+   if (!validateBuyerInfo(buyer)) return;
+
    const payBtn = document.getElementById('pay-btn');
    const loadingEl = document.getElementById('payment-loading');
 
-   // دکمه رو غیرفعال می‌کنیم و لودینگ رو نشون می‌دیم تا کاربر دوباره کلیک نکنه
    payBtn.disabled = true;
    loadingEl.style.display = 'flex';
 
-   // یه تاخیر مصنوعی ۲ ثانیه‌ای، فقط برای شبیه‌سازی اتصال به بانک
+   // تاخیر مصنوعی، شبیه‌سازی اتصال اولیه به بانک برای ارسال کد
+   await new Promise(resolve => setTimeout(resolve, 1500));
+
+   loadingEl.style.display = 'none';
+   payBtn.disabled = false;
+
+   // فرم کارت رو مخفی و باکس OTP رو نشون می‌دیم
+   document.getElementById('payment-form').style.display = 'none';
+   document.getElementById('otp-box').style.display = 'block';
+});
+
+
+// _______________________________ مرحله ۲: تایید OTP → ارسال نهایی سفارش _______________________________
+
+document.getElementById('confirm-otp-btn').addEventListener('click', async () => {
+   const otpInput = document.getElementById('otp-input');
+   const otpValue = otpInput.value.trim();
+
+   if (otpValue.length !== 6) {
+      alert('کد تایید ۶ رقمی رو کامل وارد کنید');
+      return;
+   }
+
+   const confirmBtn = document.getElementById('confirm-otp-btn');
+   const loadingEl = document.getElementById('payment-loading');
+
+   confirmBtn.disabled = true;
+   loadingEl.style.display = 'flex';
+
+   // تاخیر مصنوعی، شبیه‌سازی تایید نهایی تراکنش
    await new Promise(resolve => setTimeout(resolve, 2000));
+
+   const buyer = getBuyerInfo();
 
    try {
       const response = await fetch('/shop/frontend/php/checkout/checkout_process.php', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ cart: getCart() })
+         body: JSON.stringify({
+            cart: getCart(),
+            buyer: buyer
+         })
       });
 
       const data = await response.json();
 
       if (!data.success) {
          alert(data.message || 'پرداخت ناموفق بود، دوباره تلاش کنید');
-         payBtn.disabled = false;
+         confirmBtn.disabled = false;
          loadingEl.style.display = 'none';
          return;
       }
 
-      // پرداخت موفق بود، پس سبد خرید رو خالی می‌کنیم
       clearCart();
-
-      // و کاربر رو به صفحه رسید، همراه با شماره سفارش، هدایت می‌کنیم
       window.location.href = '/shop/frontend/php/checkout/receipt.php?order=' + data.order_number;
 
    } catch (err) {
       alert('خطایی رخ داد، دوباره تلاش کنید');
-      payBtn.disabled = false;
+      confirmBtn.disabled = false;
       loadingEl.style.display = 'none';
    }
 });
 
 
-// نمایش اولیه خلاصه سفارش، به محض لود شدن اسکریپت
+// نمایش اولیه خلاصه سفارش
 renderCheckoutSummary();

@@ -42,14 +42,27 @@ if (!isset($_SESSION['user_id'])) {
 
             <h2>اطلاعات خریدار</h2>
 
-            <!-- این دو تا فیلد فقط نمایشی هستن، از سشن کاربر پر میشن و قابل ویرایش نیستن -->
+
             <div class="checkout-field">
-               <label>نام</label>
-               <input type="text" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" disabled>
+               <label>نام و نام خانوادگی *</label>
+               <input type="text" id="buyer-name" required
+                  value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>">
             </div>
             <div class="checkout-field">
-               <label>ایمیل</label>
-               <input type="text" value="<?php echo htmlspecialchars($_SESSION['user_email']); ?>" disabled>
+               <label>آدرس (خیابان، پلاک، واحد) *</label>
+               <input type="text" id="buyer-address" placeholder="آدرس خیابان" required>
+            </div>
+            <div class="checkout-field">
+               <label>تلفن همراه *</label>
+               <input type="text" id="buyer-phone" placeholder="09xxxxxxxxx" required>
+            </div>
+            <div class="checkout-field">
+               <label>زمان دقیق تحویل سفارش</label>
+               <input type="text" id="delivery-time" placeholder="مثلاً: شنبه ۲۵ بهمن - ساعت ۱۷ تا ۱۹">
+            </div>
+            <div class="checkout-field">
+               <label>توضیحات تکمیلی سفارش</label>
+               <textarea id="order-notes" placeholder="توضیحات تکمیلی سفارش رو اینجا بنویسید."></textarea>
             </div>
 
             <h2>اطلاعات کارت (نمایشی)</h2>
@@ -74,6 +87,14 @@ if (!isset($_SESSION['user_id'])) {
 
                <button type="submit" id="pay-btn" class="btn-primary">پرداخت</button>
             </form>
+            
+            <!-- باکس رمز پویا - اول مخفیه، بعد از زدن دکمه پرداخت نشون داده میشه -->
+            <div id="otp-box" class="otp-box" style="display:none;">
+               <h3>کد تایید پویا</h3>
+               <p>کد ۶ رقمی ارسال‌شده به شماره همراه خود را وارد کنید (شبیه‌سازی‌شده)</p>
+               <input type="text" id="otp-input" maxlength="6" placeholder="------">
+               <button type="button" id="confirm-otp-btn" class="btn-primary">تایید و پرداخت</button>
+            </div>
 
          </div>
 
