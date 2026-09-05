@@ -40,6 +40,7 @@ if ($category && $search !== '') {
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
+
 <head>
    <meta charset="UTF-8">
    <title>محصولات - GolStore</title>
@@ -58,7 +59,7 @@ if ($category && $search !== '') {
    <?php include '../../partials/header/header.php'; ?>
    <!------------------------------------------------------------------------------------------------------->
 
-   
+
 
    <!------------------------------------------------ Main ------------------------------------------------>
    <main>
