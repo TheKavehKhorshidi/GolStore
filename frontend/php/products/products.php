@@ -2,6 +2,7 @@
 require '../../../backend/db.php';
 require '../../partials/config.php';
 
+
 // گرفتن دسته‌بندی و متن جستجو از آدرس صفحه
 $category = $_GET['category'] ?? null;
 $search = trim($_GET['search'] ?? '');
