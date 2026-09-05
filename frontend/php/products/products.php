@@ -51,6 +51,7 @@ if ($category && $search !== '') {
    <link rel="stylesheet" href="../../css/footer/footer.css"> <!-- footer -->
 </head>
 
+
 <body>
 
 
