@@ -42,12 +42,13 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
          <h1 class="section-title">پنل مدیریت</h1>
          <p class="cart-subtitle">مدیریت محصولات</p>
       </div>
-      
+
       <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
          <a href="../index.php" class="admin-nav-item">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item active">محصولات</a>
          <a href="../users/users.php" class="admin-nav-item">کاربران</a>
+         <a href="../comments/comments.php" class="admin-nav-item">نظرات</a>
       </div>
 
       <div class="admin-toolbar">
@@ -74,7 +75,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                <?php else: ?>
                   <?php foreach ($products as $product): ?>
                      <tr>
-                        <td><img src="/shop/frontend/<?php echo htmlspecialchars($product['image']); ?>" class="admin-product-img"></td>
+                        <td><img src="/shop/frontend/<?php echo htmlspecialchars($product['image']); ?>"
+                              class="admin-product-img"></td>
                         <td><?php echo htmlspecialchars($product['name']); ?></td>
                         <td><?php echo htmlspecialchars($product['category']); ?></td>
                         <td><?php echo number_format($product['price']); ?> تومان</td>

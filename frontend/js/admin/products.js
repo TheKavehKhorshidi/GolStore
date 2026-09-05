@@ -14,7 +14,7 @@ document.querySelectorAll('.admin-delete-btn').forEach(button => {
       button.disabled = true;
 
       try {
-         const response = await fetch('/shop/frontend/php/admin/delete_product.php', {
+         const response = await fetch('/shop/frontend/php/admin/products/delete_product.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: productId })

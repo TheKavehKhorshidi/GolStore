@@ -1,4 +1,3 @@
-
 <?php
 require '../../../partials/config.php';
 session_start();
@@ -46,10 +45,12 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
          <p class="cart-subtitle">مدیریت کاربران</p>
       </div>
 
-       <div class="admin-nav">
+      <div class="admin-nav">
          <a href="../index.php" class="admin-nav-item">سفارش‌ها</a>
          <a href="../products/products.php" class="admin-nav-item">محصولات</a>
          <a href="../users/users.php" class="admin-nav-item active">کاربران</a>
+         <a href="../comments/comments.php" class="admin-nav-item">نظرات</a>
+
       </div>
 
       <div class="admin-table-wrapper">
