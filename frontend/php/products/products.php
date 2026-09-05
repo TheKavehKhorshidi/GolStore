@@ -6,6 +6,7 @@ require '../../partials/config.php';
 $category = $_GET['category'] ?? null;
 $search = trim($_GET['search'] ?? '');
 
+
 // _______________________________ ساخت کوئری بر اساس دسته‌بندی و جستجو _______________________________
 
 if ($category && $search !== '') {
