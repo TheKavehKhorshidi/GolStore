@@ -1,8 +1,9 @@
+
 <?php
-require '../../partials/config.php';
+require '../../../partials/config.php';
 session_start();
 
-require_once __DIR__ . '/../../../backend/db.php';
+require_once __DIR__ . '/../../../../backend/db.php';
 
 
 // _______________________________ بررسی دسترسی ادمین _______________________________
@@ -35,7 +36,8 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
 
-   <?php include '../../partials/header/header.php'; ?>
+   <?php include '../../../partials/header/header.php'; ?>
+
 
    <main class="container admin-page">
 
@@ -44,10 +46,10 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
          <p class="cart-subtitle">مدیریت کاربران</p>
       </div>
 
-      <div class="admin-nav">
-         <a href="index.php" class="admin-nav-item">سفارش‌ها</a>
-         <a href="products.php" class="admin-nav-item">محصولات</a>
-         <a href="users.php" class="admin-nav-item active">کاربران</a>
+       <div class="admin-nav">
+         <a href="../index.php" class="admin-nav-item">سفارش‌ها</a>
+         <a href="../products/products.php" class="admin-nav-item">محصولات</a>
+         <a href="../users/users.php" class="admin-nav-item active">کاربران</a>
       </div>
 
       <div class="admin-table-wrapper">

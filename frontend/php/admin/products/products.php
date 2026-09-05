@@ -1,5 +1,5 @@
 <?php
-require '../../partials/config.php';
+require '../../../partials/config.php';
 session_start();
 
 // فقط ادمین اجازه ورود داره
@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
    exit;
 }
 
-require_once __DIR__ . '/../../../backend/db.php';
+require_once __DIR__ . '/../../../../backend/db.php';
 
 
 // _______________________________ خوندن محصولات از دیتابیس _______________________________
@@ -34,7 +34,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
 
-   <?php include '../../partials/header/header.php'; ?>
+   <?php include '../../../partials/header/header.php'; ?>
 
    <main class="container admin-page">
 
@@ -45,9 +45,9 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
       
       <!-- منوی بین صفحات پنل مدیریت -->
       <div class="admin-nav">
-         <a href="index.php" class="admin-nav-item">سفارش‌ها</a>
+         <a href="../index.php" class="admin-nav-item">سفارش‌ها</a>
          <a href="products.php" class="admin-nav-item active">محصولات</a>
-         <a href="users.php" class="admin-nav-item">کاربران</a>
+         <a href="../users/users.php" class="admin-nav-item">کاربران</a>
       </div>
 
       <div class="admin-toolbar">

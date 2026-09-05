@@ -1,3 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+   session_start();
+}
+?>
+
 <footer class="SiteFooter">
    <div class="FooterTop">
 
@@ -38,7 +44,7 @@
             </a>
 
          </div>
-         
+
       </div>
 
       <div class="FooterCol">
@@ -57,6 +63,26 @@
             <li>021-12345678</li>
             <li>GolStore@gmail.com</li>
          </ul>
+      </div>
+
+      <!-- بخش ثبت نظر - فقط برای کاربرهای لاگین‌کرده نشون داده میشه -->
+      <div class="FooterCol FooterComments">
+         <h5 class="FooterTitle">نظر شما</h5>
+
+         <?php if (isset($_SESSION['user_id'])): ?>
+
+            <form action="<?php echo $baseUrl; ?>php/comments/submit_comment.php" method="POST" class="comment-form">
+               <textarea name="message" rows="3" placeholder="نظرت رو برامون بنویس..." required></textarea>
+               <button type="submit" class="btn-primary">ارسال نظر</button>
+            </form>
+
+         <?php else: ?>
+
+            <p class="FooterDesc">
+               برای ثبت نظر، ابتدا <a href="<?php echo $baseUrl; ?>php/auth/login.php">وارد حساب کاربری</a> خود شوید.
+            </p>
+
+         <?php endif; ?>
       </div>
 
    </div>

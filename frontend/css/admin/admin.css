@@ -230,3 +230,37 @@
    color: #999;
    margin-bottom: 8px;
 }
+
+
+/* =========================
+   دکمه باز/بسته کردن جزئیات سفارش
+========================= */
+
+.order-toggle-btn {
+   background: none;
+   border: none;
+   font-size: 16px;
+   color: #4f6d43;
+   cursor: pointer;
+   padding: 4px 8px;
+   font-family: inherit;
+}
+
+.order-details-row td {
+   background: #fafafa;
+   white-space: normal;
+}
+
+.order-details-box {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   padding: 10px 4px;
+   font-size: 13px;
+   color: #444;
+}
+
+.order-details-box strong {
+   color: #333;
+   margin-left: 4px;
+}

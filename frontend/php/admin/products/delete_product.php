@@ -1,12 +1,12 @@
 <?php
-// frontend/php/admin/delete_product.php
+// frontend/php/admin/products/delete_product.php
 //
 // این فایل یه محصول رو کامل از دیتابیس و عکسش رو از روی سرور حذف می‌کنه
 
 header('Content-Type: application/json; charset=utf-8');
 session_start();
 
-require_once __DIR__ . '/../../../backend/db.php';
+require_once __DIR__ . '/../../../../backend/db.php';
 
 
 // _______________________________ بررسی متد و دسترسی ادمین _______________________________
@@ -62,7 +62,7 @@ $stmt->close();
 
 // اگه محصول عکس داشت، فایلش رو هم از روی سرور پاک می‌کنیم
 if (!empty($product['image'])) {
-   $imagePath = __DIR__ . '/../../' . $product['image'];
+   $imagePath = __DIR__ . '/../../../' . $product['image'];
 
    if (file_exists($imagePath)) {
       unlink($imagePath);

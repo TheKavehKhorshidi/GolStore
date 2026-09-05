@@ -1,5 +1,5 @@
 <?php
-require '../../partials/config.php';
+require '../../../partials/config.php';
 session_start();
 
 // فقط ادمین اجازه ورود داره
@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
    exit;
 }
 
-require_once __DIR__ . '/../../../backend/db.php';
+require_once __DIR__ . '/../../../../backend/db.php';
 
 
 // _______________________________ تشخیص حالت افزودن یا ویرایش _______________________________
@@ -63,7 +63,7 @@ $categories = ['گیاهان آپارتمانی', 'باکس گل', 'دسته گ�
 
 <body>
 
-   <?php include '../../partials/header/header.php'; ?>
+   <?php include '../../../partials/header/header.php'; ?>
 
    <main class="container admin-page">
 

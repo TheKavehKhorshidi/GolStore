@@ -129,3 +129,59 @@
    width: 40px;
    height: 40px;
 }
+
+/* =========================
+   بخش فرم ثبت نظر
+========================= */
+
+.FooterComments .FooterDesc {
+   margin-bottom: 0;
+}
+
+.FooterComments .FooterDesc a {
+   color: #8fbb7d;
+   text-decoration: underline;
+}
+
+.comment-form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.comment-form textarea {
+   width: 100%;
+   resize: vertical;
+   min-height: 70px;
+   padding: 10px 14px;
+   border: 1px solid rgba(255, 255, 255, 0.15);
+   border-radius: 10px;
+   background: rgba(255, 255, 255, 0.06);
+   color: #e7ede4;
+   font-family: inherit;
+   font-size: 14px;
+}
+
+.comment-form textarea::placeholder {
+   color: #8a947f;
+}
+
+.comment-form textarea:focus {
+   outline: none;
+   border-color: #6b8f5c;
+}
+
+.comment-form button {
+   align-self: flex-start;
+   background: #6b8f5c;
+   color: #fff;
+   border: none;
+   cursor: pointer;
+   font-family: inherit;
+   font-size: 14px;
+   transition: background 0.2s ease;
+}
+
+.comment-form button:hover {
+   background: #4f6d43;
+}

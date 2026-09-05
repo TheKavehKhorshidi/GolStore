@@ -1,18 +1,18 @@
 <?php
-// frontend/php/admin/save_product.php
+// frontend/php/admin/products/save_product.php
 //
 // این فایل هم محصول جدید ذخیره می‌کنه، هم محصول موجود رو آپدیت می‌کنه
 // (بستگی به اینکه فرم با id ارسال شده باشه یا نه)
 
 session_start();
 
-require_once __DIR__ . '/../../../backend/db.php';
+require_once __DIR__ . '/../../../../backend/db.php';
 
 
 // _______________________________ بررسی دسترسی و متد _______________________________
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-   header('Location: ../../index.php');
+   header('Location: ../../../index.php');
    exit;
 }
 
@@ -62,7 +62,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
    $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
    $fileName = uniqid('product_') . '.' . $extension;
 
-   $uploadDir = __DIR__ . '/../../image/products/';
+   $uploadDir = __DIR__ . '/../../../image/products/';
    $uploadPath = $uploadDir . $fileName;
 
    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
