@@ -180,3 +180,47 @@
    font-weight: 700;
 }
 
+
+
+.ProductSearchForm {
+   display: flex;
+   gap: 10px;
+   margin-bottom: 24px;
+}
+
+.ProductSearchInput {
+   flex: 1;
+   max-width: 400px;
+   padding: 10px 16px;
+   border: 1px solid #ddd;
+   border-radius: 10px;
+   font-family: inherit;
+   font-size: 14px;
+}
+
+.ProductSearchInput:focus {
+   outline: none;
+   border-color: #4f6d43;
+}
+
+.ProductSearchBtn {
+   padding: 10px 24px;
+   background: #4f6d43;
+   color: #fff;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   font-family: inherit;
+   font-size: 14px;
+}
+
+.ProductSearchBtn:hover {
+   background: #3d5533;
+}
+
+.ProductsEmpty {
+   text-align: center;
+   color: #999;
+   padding: 40px;
+   width: 100%;
+}
